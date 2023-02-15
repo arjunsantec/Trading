@@ -1,0 +1,6 @@
+::ng-deep p-dropdown.ng-invalid .p-dropdown {
+    border: 1px solid var(--red-500);
+}
+::ng-deep p-dropdown.ng-invalid .p-dropdown:hover {
+    border-color: var(--red-500);
+}

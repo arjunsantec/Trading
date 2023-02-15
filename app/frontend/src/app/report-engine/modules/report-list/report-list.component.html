@@ -1,0 +1,12 @@
+<p-orderList [value]="reportList" [listStyle]="{'max-height':'30rem'}" header="Report Lists" filterBy="report_name" filterPlaceholder="Filter by name" [dragdrop]="true">
+    <ng-template let-report pTemplate="item">
+        <div class="product-item">
+            <div class="product-list-detail">
+                <h5>{{report.report_name}}</h5>
+            </div>
+            <div class="product-list-action">
+                <button pButton type="button" label="VIEW" (click)="goToReportViewer(report)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-orderList>

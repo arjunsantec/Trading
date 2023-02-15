@@ -1,0 +1,11 @@
+<div *ngIf="isInitialConfigLoaded">
+  <p-toast position="top-right" key="toaster"></p-toast>
+  <app-topbar></app-topbar>
+  <div class="page-container">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>
+<div *ngIf="!isInitialConfigLoaded">
+  <p></p>
+</div>

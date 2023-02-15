@@ -1,0 +1,167 @@
+<div fxLayout="row" style="height: 50px;" fxLayoutAlign="center">
+    <div fxFlex="70">&nbsp;</div>
+    <div fxFlex="30">Exporter: &nbsp;{{invoiceObject.exporter}}</div>
+</div>
+<div class="card" fxLayout="column">
+    <div fxLayout="row" style="height: 30px;">
+        <div fxLayoutAlign="center center" class="border" style="text-decoration: underline;" fxFlex="25"><b>CONSIGNEE</b></div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="20">&nbsp;</div>
+        <div fxLayoutAlign="center center" class="border" style="text-decoration: underline; font-size: 12px;"fxFlex="30"><b>IMPORTER OF RECORD/CONSIGNEE:</b></div>
+        <div fxLayoutAlign="center center" class="border" style="text-decoration: underline;"fxFlex="26"><b>CUSTOMS BROKER</b></div>
+    </div>
+    <div fxLayout="row" style="height: 100px;">
+        <div fxLayoutAlign="center center" class="border" fxFlex="25">{{invoiceObject.consignee}}</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="20">&nbsp;</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="30">{{invoiceObject.importerOfRecord}}</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="26">&nbsp;{{invoiceObject.customsBrokerName}},<br>{{customsBrokerAddress}}<br>Contact person:&nbsp;{{contactPersonName}}</div>
+    </div>
+    <div fxLayout="row">
+        <div fxLayoutAlign="center center" class="border" fxFlex="25">PROFORMA INVOICE (for custom clearance only) <br>No:&nbsp;&nbsp;{{invoiceObject.invoice}}</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="20">&nbsp;</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="30">Date: {{invoiceObject.invoiceDate | date:'dd.MMM.YYYY'}}</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="26">Initial: {{invoiceObject.initial}}</div>
+    </div>
+    <div fxLayout="row" class="border" style="height: 10px;">
+        &nbsp; 
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="border" >
+        Quantity & Complete Detailed Description of Goods 
+    </div>
+    <div fxLayout="row" class="border" style="height: 10px;">
+        &nbsp; 
+    </div>
+    <div fxLayout="row" style="height: 20px;">
+        <div fxLayoutAlign="flex-start" class="border" fxFlex="34">&nbsp;Protocol: &nbsp;{{invoiceObject.protocol}}</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="32">&nbsp;</div>
+        <div fxLayoutAlign="flex-start" class="border" fxFlex="36">&nbsp;Incoterms:  &nbsp;{{invoiceObject.incoterms}}</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" class="border" style="height: 25px;">
+        &nbsp;Shipments Contains: &nbsp; {{invoiceObject.shipmentsContains}}
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="300">
+            <p-table [value]="this.invoiceObject.invoice_creation_list"
+                [style]="{'width':'100%', 'overflow':'auto!important','border':'1px solid black'}" [autoLayout]="true"
+                [responsive]="true" [resizableColumns]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th
+                            [style]="{'width': '500px', 'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Description
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Expiry<br> Date
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            &nbsp;&nbsp;Batch#&nbsp;&nbsp;
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Quantity
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Country of<br> Origin
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Tariff No.
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Value<br> per Unit
+                        </th>
+                        <th
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            Sub-total<br> EUR
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-invoiceItem>
+                    <tr>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center', 'white-space': 'pre-wrap'}">
+                            {{invoiceItem.description}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            {{invoiceItem.expiry_date | date: 'dd.MMM.YYYY'}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center', 'white-space': 'pre-wrap'}">
+                            {{invoiceItem.batch}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            {{invoiceItem.quantity}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center', 'white-space': 'pre-wrap'}">
+                            {{invoiceItem.country_of_origin}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center', 'white-space': 'pre-wrap'}">
+                            {{invoiceItem.tariff_no}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            {{invoiceItem.value_per_unit}}</td>
+                        <td
+                            [style]="{'border-right':'0.1px solid black','border-bottom':'0.1px solid black','text-align':'center'}">
+                            {{invoiceItem.sub_total}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="flex-start" class="border">
+        &nbsp;TOTAL Quantity: &nbsp; {{invoiceObject.totalQuantity}}
+    </div>
+    <div fxLayout="row">
+        <div fxLayoutAlign="flex-start" class="border" fxFlex="34">&nbsp;</div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="32">&nbsp;</div>
+        <div fxLayoutAlign="flex-start" class="border" fxFlex="35">&nbsp;</div>
+    </div>
+    <div fxLayout="row">
+        <div fxLayoutAlign="flex-start" class="border" fxFlex="70"  fxLayout="column">
+            <div *ngFor="let item of noteArray">&nbsp;{{item}}<br></div>
+            <!-- <div>Medication for clinical trial only; No commercial value, not for sale</div>
+            <div>Transport conditions: between 2°C and 8°C & Storage conditions: 2°C and 8°C</div>
+            <div>Handle with care & Protect from light,heat and moisture</div>
+            <div>Do not pile up OR stack packages</div>
+            <div>DO NOT OPEN PALLETS WITHOUT PRIOR NOTIFICATION OF FISHER OR CONSIGNEE</div> -->
+        </div>
+        <div fxLayoutAlign="center center" class="border" fxFlex="31" fxLayout="column">
+            <p>Value for customs purpose only</p>
+            <p style="text-decoration: underline;">TOTAL</p>
+            <p>EUR {{invoiceObject.subTotal}}</p>
+        </div>
+    </div>
+    <div fxLayout="row" class="border">
+        <div fxLayoutAlign="flex-start" fxLayout="column">
+            <p>&nbsp;Country of origin: &nbsp;{{invoiceObject.countryOfOrigin}}</p>
+            <p>&nbsp;Manufacturer: &nbsp;{{invoiceObject.manufacturer}}</p>
+        </div>
+    </div>
+    <div fxLayout="row">
+        <div fxLayout="column" fxFlex="55" class="border">
+            <p style="text-decoration: underline;" fxLayoutAlign="center center">Shipping Details</p>
+            <p fxLayoutAlign="flex-start">&nbsp;Carrier: &nbsp;{{invoiceObject.carrier}}</p>
+            <p fxLayoutAlign="flex-start">&nbsp;Service: &nbsp;{{invoiceObject.service}}</p>
+            <p fxLayoutAlign="flex-start">&nbsp;HAWB: &nbsp;{{invoiceObject.hawb}}</p><br>
+        </div>
+        <div fxLayout="column" fxFlex="46" class="border" fxLayoutAlign="center">
+            <p fxLayoutAlign="flex-start">&nbsp;Dispatch/ Export date: &nbsp;{{invoiceObject.dispatchDate | date:'dd.MMM.YYYY'}}</p>
+            <p fxLayoutAlign="flex-start">&nbsp;Delivery date: &nbsp;{{invoiceObject.deliveryDate | date:'dd.MMM.YYYY'}}</p><br>
+        </div>
+    </div>
+    <div fxLayout="row">
+        <div fxLayout="column" fxFlex="40" class="border" fxLayoutAlign="center">
+            <p fxLayoutAlign="flex-start">&nbsp;Consignment: {{invoiceObject.consignment}} &nbsp;&nbsp; marks: {{invoiceObject.marks}}</p>
+            <p fxLayoutAlign="flex-start">&nbsp;Quantity: &nbsp;&nbsp;&nbsp;{{invoiceObject.quantity}}</p>
+        </div>
+        <div fxLayout="column" fxFlex="30" class="border" fxLayoutAlign="center">
+            <div class="border" style="padding: 4px;" fxLayoutAlign="flex-start">Net Weight (kg): &nbsp;{{invoiceObject.netWeight}}</div>
+            <div class="border" style="padding: 4px;" fxLayoutAlign="flex-start">Gross Weight (kg): &nbsp;{{invoiceObject.grossWeight}}</div>
+        </div>
+        <div fxLayout="column" fxFlex="31" class="border" fxLayoutAlign="center">
+            <p fxLayoutAlign="flex-start">&nbsp;Dimension (cm): &nbsp;{{invoiceObject.dimension}}</p>
+        </div>
+    </div>
+</div>

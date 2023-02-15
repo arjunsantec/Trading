@@ -1,0 +1,107 @@
+<div class="card" style="margin: 50px 0;">
+    <div class="body p-4" style="padding: 1.5rem;">
+        <p-table id="excel-table" [scrollable]="true" scrollHeight="600px" #dt [value]="sql_output"
+            responsiveLayout="scroll" selectionMode="multiple" [(selection)]="selectedRows"
+            [exportHeader]="customExportHeader" exportFilename="Report" styleClass="p-datatable-gridlines"
+            [globalFilterFields]="columns" (onFilter)="onFilter($event, dt)"
+            [style]="{'font-size': '14px', 'margin-top': '20px'}">
+
+            <ng-template pTemplate="caption">
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
+                    <div class="flex" style="display: flex;">
+                        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                            (click)="clear(dt)" style="margin-right: 0.5rem;"></button>
+                        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportToexel()"
+                            class="p-button-success" pTooltip="XLS" tooltipPosition="bottom" style="margin-right: 0.5rem;"></button>
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()"
+                            class="p-button-warning" pTooltip="PDF" tooltipPosition="bottom" style="margin-right: 0.5rem;"></button>
+                        <!-- <p-multiSelect [options]="columns" [(ngModel)]="selectedCities" ></p-multiSelect> -->
+
+                        <p-multiSelect [options]="filtered_obj_columns" optionLabel="name" [(ngModel)]="selectedColumns"
+                            defaultLabel="Select a column" class="multiselect-custom" [filter]="true"
+                            [virtualScroll]="true" [itemSize]="50" (onChange)="onChangeHandler($event)"
+                            optionValue="value" display="chip">
+
+                            <ng-template let-value pTemplate="selectedItems">
+                                <div class="country-item country-item-value" *ngFor="let option of selectedColumns">
+                                    <div>{{option}}</div>
+                                </div>
+                                <div *ngIf="!selectedColumns || selectedColumns.length === 0"
+                                    class="country-placeholder">
+                                    Select Columns
+                                </div>
+                            </ng-template>
+                            <ng-template let-value pTemplate="item">
+                                <div class="country-item">
+                                    <div>{{value.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                    </div>
+                    <div class="flex">
+                        <span class="p-input-icon-left" style="margin-left: auto;">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="globalSearch($event, dt)"
+                                placeholder="Search keyword" />
+                        </span>
+                    </div>
+                </div>
+                <hr>
+                <div style="display: flex; flex-wrap: wrap;">
+                    <div style="margin-right: 0.5rem;">
+                        <p-calendar [(ngModel)]="from_date" dateFormat="yy-mm-dd" placeholder="From Date"
+                        [inputStyle]="{'width': '350px'}"></p-calendar>
+                    </div>
+                    <div style="margin-right: 0.5rem;">
+                        <p-calendar [(ngModel)]="to_date" dateFormat="yy-mm-dd" placeholder="To Date"
+                        [inputStyle]="{'width': '350px'}"></p-calendar>
+                    </div>
+                    <p-multiSelect [options]="filter_columns_array" [(ngModel)]="selectedFilterColumn"
+                        optionLabel="display_name"></p-multiSelect>
+                    <button pButton type="button" label="Show Data" (click)="showData()"
+                        style="white-space: nowrap; margin-left: auto;"></button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap;">
+                    <div *ngFor="let col of selectedFilterColumn">
+                        <label for="col">{{col.display_name}} : </label>
+                        <input pInputText type="text" placeholder="{{col.display_name}}" name="{{col.display_name}}"
+                            [(ngModel)]="col.column_value" />
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let header of columns; let i=index" pSortableColumn={{columns[i]}}
+                        style="flex-wrap: wrap; white-space: wrap;width:230px">
+                        {{header}}
+                        <p-sortIcon field={{columns[i]}}></p-sortIcon>
+                        <p-columnFilter type="text" field={{columns[i]}} display="menu"></p-columnFilter>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td colspan="16" class="" style="padding: 1.5rem;">
+                        No Data Found, Select a Date range
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-sqloutput>
+                <tr>
+                    <td *ngFor="let column of columns; let i=index"
+                        style="width:200px; flex-wrap: wrap; white-space: wrap;">{{
+                        sqloutput[columns[i]] }}</td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <tr>
+                    <td *ngFor="let column of columnTotal; let i=index">{{ column }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

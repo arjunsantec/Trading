@@ -1,0 +1,69 @@
+<div class="page">
+    <p-card>
+        <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">Dynamic Forms</div>
+              <div class="card-body">
+                <button pButton pRipple label="Form Example 1" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showCompanyModifier = true"></button>
+                <button pButton pRipple label="Form Example 2" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showCompanyModifier2 = true"></button>
+                <button pButton pRipple label="Form Example 3" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showCompanyModifier3 = true"></button>
+              </div>
+            </div>
+          </div> 
+    </p-card>
+    <p-card>
+        <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">Multiple Forms</div>
+              <div class="card-body">
+                <button pButton pRipple label="Tab Example" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showMultiFormModifier = true"></button>
+                <button pButton pRipple label="Fieldset Example" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showMultiFormModifier2 = true"></button>
+                <button pButton pRipple label="Panel Example" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showMultiFormModifier3 = true"></button>
+              </div>
+            </div>
+          </div> 
+    </p-card>
+</div>
+<p-sidebar [(visible)]="showCompanyModifier" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearFields()">
+
+    <h1 style="font-weight:normal">Sample Forms</h1>
+    <dynamic-form-builder [fields]="getFields()" (onSubmit)="formSubmission($event)"></dynamic-form-builder>
+
+</p-sidebar>
+<p-sidebar [(visible)]="showCompanyModifier2" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearFields()">
+
+    <h1 style="font-weight:normal">Sample Forms 2</h1>
+    <dynamic-form-builder [fields]="getFields2()" (onSubmit)="formSubmission($event)"></dynamic-form-builder>
+
+</p-sidebar>
+<p-sidebar [(visible)]="showCompanyModifier3" position="right" [baseZIndex]="10000" (onHide)="clearFields()">
+
+    <h1 style="font-weight:normal">Sample Forms 3</h1>
+    <dynamic-form-builder [fields]="getFields3()" (onSubmit)="formSubmission($event)" [fullScreen]="false"></dynamic-form-builder>
+
+</p-sidebar>
+
+
+
+<p-sidebar [(visible)]="showMultiFormModifier" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearFields()">
+
+  <div class="sidebar-container" fxLayout="column" fxFill>
+    <h1 style="font-weight:normal">Sample Forms 2</h1>
+    <dynamic-form-builder [fields]="getMultiFields()" (onSubmit)="formSubmission($event)"></dynamic-form-builder>  
+  </div>
+  
+</p-sidebar>
+<p-sidebar [(visible)]="showMultiFormModifier2" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearFields()">
+
+    <h1 style="font-weight:normal">Sample Forms 2</h1>
+    Comming Soon
+    <!-- <dynamic-form-builder [fields]="getMultiFields2()" (onSubmit)="formSubmission($event)"></dynamic-form-builder> -->
+
+</p-sidebar>
+<p-sidebar [(visible)]="showMultiFormModifier3" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearFields()">
+
+    <h1 style="font-weight:normal">Sample Forms 2</h1>
+    Comming Soon
+    <!-- <dynamic-form-builder [fields]="getMultiFields3()" (onSubmit)="formSubmission($event)"></dynamic-form-builder> -->
+
+</p-sidebar>

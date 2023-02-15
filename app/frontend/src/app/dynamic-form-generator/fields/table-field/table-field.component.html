@@ -1,0 +1,116 @@
+<div>
+    <div class="table-container">
+        <p-table #dt [scrollHeight]="'calc(100vh - 260px)'" [scrollable]="true" [value]="dataSource" [dataKey]="dataKey"
+            editMode="row" (onEditComplete)="onTableValueChangeHandler($event, field, dt.value)">
+            <!-- <ng-template pTemplate="caption" *ngIf="field?.tableCaption">
+                <div class="table-caption">
+                    {{field?.tableCaptionLabel ? field?.tableCaptionLabel : 'Add Content'}}
+                    <button pButton type="button" (click)="showDialog()" icon="pi pi-plus" label="{{field?.tableCaptionButtonLabel}}"></button>
+                </div>
+                <p-dialog header="{{field?.tableCaptionLabel ? field?.tableCaptionLabel : 'Add Content'}}" [(visible)]="display"  (onHide)="close()" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw', height: '50vw'}">
+                    <dynamic-form-builder [fields]="field.dialogueFields" (onSubmit)="saveDialogueData($event)"></dynamic-form-builder>
+                </p-dialog>
+            </ng-template> -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <ng-container *ngFor="let col of columnSchema">
+                        <th>
+                            {{ col | translate }}
+                        </th>
+                    </ng-container>
+                    <th pFrozenColumn alignFrozen="right" [frozen]="true" style="width:8rem">
+                        <button pButton pRipple type="button" icon="pi pi-plus" (click)="onRowAddInit()" 
+                            class="p-button-rounded p-button-text" [disabled]="field.readonly"></button>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="item">
+                    <ng-container *ngFor="let field of formSchema">
+                        <td [pEditableColumn]="(dataSource)">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown appendTo="body" *ngIf="field.type === 'dropdown'" [id]="field?.label" [name]="field?.name" 
+                                        [optionLabel]="field?.optionLabel" [optionValue]="field?.optionValue" 
+                                        [placeholder]="field?.placeholder" [options]="field.options"
+                                        [(ngModel)]="item[field.name]" [style]="{'width': '180px'}" [filter]="true"
+                                        [filterBy]="field?.optionLabel" [showClear]="true" [virtualScroll]="true"
+                                        [itemSize]="50" (onChange)="onChangeHandler($event, field, item)" [required]="field?.required ? field?.required : true"
+                                        [emptyFilterMessage]="'noResultFoundErrorMsg_SC' | translate"
+                                        (keydown)="disableNavigation($event)"
+                                    >
+                                        <ng-template pTemplate="emptyfilter" *ngIf="field?.emptyCustomDialogTemplate">
+                                            <span class="p-buttonset">
+                                                <button class="p-button-rounded" *ngIf="field?.dialogue" pButton icon="pi pi-plus" type="button" (click)="showDialog(item)" [label]="field.emptyComment" style="border-radius: 5px"></button>
+                                            </span>
+                                        </ng-template>
+                                    </p-dropdown>
+                                    <!-- [emptyFilterMessage]="'noResultFoundErrorMsg_SC' | translate" -->
+                                    <!-- <button *ngIf="field?.dialogue" pButton [style]="{'width':'20px'}" icon="pi pi-plus" type="button" (click)="showDialog(item)"></button> -->
+                                    <div *ngIf="field?.dialogue">
+                                        <p-dialog [modal]="true" [dismissableMask]="true" [appendTo]="'body'" header="{{field.dialogueLabel}}" (visibleChange)="handleDialogue($event)" [(visible)]="display" [style]="{width: field.dialogueWidth, height: field.dialogueHeight}">
+                                          <dynamic-form-builder [fields]="field.dialogueFields" (onSubmit)="saveDialogueData($event)"></dynamic-form-builder>
+                                        </p-dialog>
+                                    </div>
+                                    <input *ngIf="field.type === 'input'" pInputText type="text"
+                                        [(ngModel)]="item[field.name]" [placeholder]="field?.placeholder?field?.placeholder:''" 
+                                        (change)="onValueChangeHandler(item[field.name], field, item)" [readonly]="field?.readonly"  [required]="field?.required ? field?.required : true"
+                                        (keydown)="disableNavigation($event)">
+                                    <input *ngIf="field.type === 'date'" pInputText type="date"
+                                        [(ngModel)]="item[field.name]" [style]="{'width':'180px'}" [required]="field?.required ? field?.required : true"
+                                        (keydown)="disableNavigation($event)">
+                                    <!-- <input *ngIf="field.type === 'number'" pInputText type="number" [min]="0"
+                                        [(ngModel)]="item[field.name]" (change)="onValueChangeHandler(item[field.name], field, item)"> -->
+                                    <p-inputNumber *ngIf="field.type === 'number'" [(ngModel)]="item[field.name]" 
+                                    (onBlur)="onValueChangeHandler($event, field, item)" [min]="0"
+                                    (onClear)="onValueChangeHandler($event, field, item)"
+                                    (onInput)="onValueChangeHandler($event, field, item)"
+                                    (onClear)="onValueChangeHandler($event, field, item)"
+                                    (onChange)="onValueChangeHandler($event, field, item)"
+                                    [required]="field?.required ? field?.required : true"
+                                    (keydown)="disableNavigation($event)"
+                                    ></p-inputNumber>
+                                    <div *ngIf="field.type === 'boolean'" class="p-field-checkbox">
+                                        <p-inputSwitch [name]="field?.name" [(ngModel)]="item[field.name]" (keydown)="disableNavigation($event)"></p-inputSwitch>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <p *ngIf="field.type === 'input'">{{item[field.name]}}</p>
+                                    <p *ngIf="field.type === 'date'">{{item[field.name]}}</p>
+                                    <p *ngIf="field.type === 'number'">{{item[field.name]}}</p>
+                                    <p *ngIf="field.type === 'dropdown'">{{ getDropDownText(item[field.name], field)}}</p>
+                                    <div *ngIf="field.type === 'boolean'" class="p-field-checkbox">
+                                        <p-inputSwitch [name]="field?.name" [(ngModel)]="item[field.name]" ></p-inputSwitch>
+                                    </div>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                    </ng-container>
+                    <td style="text-align:center" pFrozenColumn alignFrozen="right" [frozen]="true">
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                            (click)="onRowEditInit(item)" class="p-button-rounded p-button-text" [disabled]="disableMultipleEditing || field.readonly"></button>
+                        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-trash"
+                            (click)="onRowDeleteInit(item, ri,dt.value)" class="p-button-rounded p-button-text" [disabled]="field.readonly"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                            (click)="onRowEditSave(item)"
+                            class="p-button-rounded p-button-text p-button-success p-mr-2" [disabled]="field.readonly"></button>
+                        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                            (click)="onRowEditCancel(item, ri)"
+                            class="p-button-rounded p-button-text p-button-danger" [disabled]="field.readonly"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" *ngIf="field?.tableFooter">
+               <tr>
+                    <ng-container *ngFor="let item of field?.footerInitialise">
+                        <td class="table-footer" [style.maxWidth]="field?.maxWidthFooter">
+                            <p> {{item.name | translate}} </p>
+                            <!-- <input pInputText type="text" style="text-align:center;"
+                                        [(ngModel)]="item.name" [readonly]="true"> -->
+                        </td>
+                    </ng-container>     
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

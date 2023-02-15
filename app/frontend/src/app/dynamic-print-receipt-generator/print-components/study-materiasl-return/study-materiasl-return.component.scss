@@ -1,0 +1,161 @@
+* {
+    color: black;
+}
+
+.header {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 25px;
+    word-spacing: 12px;
+    width: 80%;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%; 
+}
+
+.company-main-container {
+    button {
+        margin: 2px;
+    }
+
+    tr {
+
+        th,
+        td:not(.p-frozen-column) {
+            width: 200px;
+        }
+
+        td {
+            .true-icon {
+                color: var(--green-500);
+            }
+
+            .false-icon {
+                color: var(--red-600);
+            }
+        }
+    }
+}
+
+fieldset {
+    border: 1px solid #000;
+}
+
+.fieldsets {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .fieldset1 {
+        font-size: medium;
+        width: 50%;
+        word-break: break-all;
+    }
+}
+
+// :host ::ng-deep fieldset {
+//     border: none;
+// }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-around;
+
+    .logo {
+        font-size: medium;
+        margin-top: 4%;
+        display: flex;
+        flex-direction: row;
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        h5 {
+            font-size: large;
+        }
+    }
+
+    .info {
+        font-size: medium;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+}
+
+.info {
+    font-size: medium;
+    // margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.geostorage {
+    margin: 0px 0px 50px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.pageBreak {
+    page-break-after: always;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead>tr>th {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #dee2e6;
+    border-width: 1px 0 2px 0;
+    font-weight: 600;
+    color: #212529;
+    background: #ffffff;
+    transition: box-shadow 0.15s;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+    text-align: left;
+    border: 5px solid #dee2e6;
+    border-width: 1px 0 0 0;
+    padding: 3px;
+}
+
+.footerTop {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+}
+
+.footerBody {
+    color: #000;
+    word-spacing: 12px;
+    .footer-text {
+        word-spacing: 2px;
+        font-size: 12px;
+    }
+}
+
+.footerFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: #000;
+
+    .english {
+        font-size: 10px;
+        display: flex;
+        width: 50%;
+    }
+
+    .georgian {
+        flex: 1;
+        font-size: 10px;
+        // margin-left: 30%;
+    }
+}
+
+.border {
+    border-width: 2px;
+    color: #000;
+    border-block-color: #000
+}

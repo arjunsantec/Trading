@@ -1,0 +1,173 @@
+<div class="header">
+    <p>ფორმა 052_გადარიცხვები საიტიდან საიტზე</p>
+    <p>Form 052_Transfers from Site to Site</p>
+</div>
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>საიტიდან/From Site</b></legend>
+            <p><b>სახელი/Name :</b> {{siteToSiteObject.fromSiteName}}</p>
+            <p><b>მისამართი/Address :</b> {{siteToSiteObject.fromAddress}}</p>
+            <p><b>ტელეფონი/Phone :</b> {{siteToSiteObject.fromPhone}}</p>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>საიტზე/To Site</b></legend>
+            <p><b>სახელი/Patient :</b> {{siteToSiteObject.toSiteName}}</p>
+            <p><b>მისამართი/Address :</b> {{siteToSiteObject.toAddress}}</p>
+            <p><b>ტელეფონი/Phone :</b> {{siteToSiteObject.toPhone}}</p>
+        </fieldset>
+    </div>
+</div>
+
+<div fxLayout="row">
+    <div fxFlex="50">
+        <div class="container">
+            <div class="logo">
+                <img src="../../../../assets//images/edit2.png" alt="logo">
+                <h5>Trust and save your time</h5>
+            </div>
+        </div>
+        <div class="geostorage">
+            <p>გეოსატორაჟი / Geostorage</p>
+        </div>
+    </div>
+    <div class="info">
+        <tr>
+            <td><b>დოკუმენტი #<br>Document #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+            <td style="margin-bottom: 5px;">{{siteToSiteObject.Document}}</td>
+        </tr><br>
+    </div>
+</div>
+
+<div>
+    <p-table #dt [columns]="columns" [value]="array" [style]="{'width':'100%','overflow':'auto!important'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th style="font-size: 12px;">
+                        <b>{{ col.label | translate }}</b>
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-siteToSiteObjectItem>
+            <tr *ngFor="let item of siteToSiteObjectItem.site_to_site_list
+            let indexOfelement=index;"[style]="{'font-size': '13px'}">
+                <td [style]="{'text-align':'center'}">{{indexOfelement + 1}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.kit_number}}</td>
+                <td>{{item.batch_no}}</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.temp}}</td>
+                <td>{{item.note}}</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>
+<hr>
+
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>სპონსორი<br>Sponsor </b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+                    <td>{{siteToSiteObject.sponsorName}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროტოკოლი #<br>Protocol #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+                    <td>{{siteToSiteObject.Protocol}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროექტი #<br>Project #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{siteToSiteObject.projectName}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>წონა<br>Weight </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{siteToSiteObject.Weight}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>ზომა <br>Size </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;
+                    <td>{{siteToSiteObject.Size}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>ყუთის რაოდენობა <br>Box quantity </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{siteToSiteObject.boxQuantity}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="pageBreak">
+</div>
+
+<div class="footerTop">
+    <p>დოკუმენტი / Document - {{this.siteToSiteObject['Document']}}</p>
+    <p>დამატებითი ინფორმაცია / Additional Information</p>
+</div>
+<hr>
+
+<div style='margin-bottom: 1px' class="footerBody">
+    <p><b>კურიერი / Courier :</b> &emsp;{{this.siteToSiteObject['fromCourier']}} , <b>ხელმოწერა / Signature :
+            ________________________</b></p>
+    <p><b>საიტიდან / From Site : &emsp;</b>{{this.siteToSiteObject['fromSiteName']}} </p>
+    <p><b>გადაცემის თარიღი / Transfer date :</b> &emsp;{{this.siteToSiteObject['transferDate'] | date: 'yyyy-MM-dd'}} <b>,
+            დრო/Time :</b> &emsp;{{this.siteToSiteObject['transferDate'] | date: 'hh:mm:ss a'}}</p>
+
+    <p><b>კურიერი / Courier :</b> &emsp;{{this.siteToSiteObject['toCourier']}} , <b>ხელმოწერა / Signature :
+            ________________________</b></p>
+    <p><b>საიტზე / To Site : &emsp;</b>{{this.siteToSiteObject['toSiteName']}} </p>
+    <p><b>Მიღების თარიღი / Delivery date :</b> &emsp;{{this.siteToSiteObject['deliveryDate'] | date: 'yyyy-MM-dd'}} <b>, დრო/Time :</b>
+        &emsp;{{this.siteToSiteObject['deliveryDate'] | date: 'hh:mm:ss a'}}</p>
+
+    მიღებული პროდუქტი დაზიანებულია? (დიახ/არა) თუ „დიახ“ აღწერეთ/Is received product damaged?(Yes/No) if 'Yes' Describe:
+    <hr>
+    <p class="footer-text" style="font-size: 13px;">
+        ამ გადაზიდვის შინაარსი გამოვლენილია მხოლოდ კლინიკური კვლევის გამოყენებისათვის და უნდა იქნას გამოყენებული მხოლოდ
+        კლინიკურ კვლევებში ჩარიცხული პაციენტების მკურნალობისთვის. არ არის კომერციული ღირებულება. არა იყიდება ან იყიდება.
+        გადაზიდვა უფასოდ უნდა გადაეცეს
+    </p>
+    <p style="word-spacing:1px; font-size: 13px;">
+        The content of this shipment is identified for clinical trial use only and must be used solely for the treatment
+        of patients enrolled in clinical trials. No commercial value. Not for sale or resale. Shipment must be hand
+        overed on free of charge basis
+    </p>
+    <p style="word-spacing:1px; font-size: medium;">
+        სსპ/SOP-25, ვერსია/Version-03, ფორმა/Form-052
+    </p>
+</div>
+<hr class="border">
+
+<div class="footerFooter">
+    <div class="english">
+        GeoStorage LTD<br>
+        G. Akhvlediani str. Building #3 Tbilisi,0109,Georgia.<br>
+        Contact person Tea Butskhrikidze<br>
+        phone : +995599 488008; +99532 2768970<br>
+        Fax : +99532 2768970<br>
+        Email: tea.butskhrikidze@storagegeo.com<br>
+    </div>
+    <div class="georgian">
+        შპს ჯეოსტორაჟი<br>
+        გ. ახვლედიანის ქ. შენობა #3 თბილისი, 0109, საქართველო.<br>
+        საკონტაქტო პირი თეა ბუცკრიკიძე<br>
+        ტელეფონი : +995599 488008; +99532 2768970<br>
+        ფაქსი : +99532 2768970<br>
+        ელ.ფოსტა: tea.butskhrikidze@storagegeo.com
+    </div>
+</div>

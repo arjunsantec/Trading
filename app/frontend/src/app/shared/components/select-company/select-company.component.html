@@ -1,0 +1,11 @@
+<div *ngIf="companyCount" fxLayout="column" fxLayoutGap="10px" fxFlexAlign="center" class="list">
+    <li *ngFor="let item of companyUserList">
+        <p fxFlex="90%">{{item.companyName}}</p>
+        <button pButton (click)="getCompany(item.company)">{{'select_TC' | translate}}</button>
+    </li>
+</div>
+
+<div *ngIf="!companyCount" fxLayout="row" fxLayoutAlign="center" class="href">
+    <a href="company">There is no company exists, please create a company.
+    </a>
+</div>

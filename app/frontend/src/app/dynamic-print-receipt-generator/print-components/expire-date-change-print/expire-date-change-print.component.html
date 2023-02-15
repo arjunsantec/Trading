@@ -1,0 +1,100 @@
+<div class="header">
+    <p>ფორმა 067_ეტიკეტირება ვადის გასვლის თარიღის შეცვლის გამო</p>
+    <p>Form 067_Relabeling due to the Expire Date changing</p>
+</div>
+
+<hr>
+
+<div fxLayout="row">
+    <div fxFlex="50">
+        <div class="container">
+            <div class="logo">
+                <img src="../../../../assets//images/edit2.png" alt="logo">
+                <h5>Trust and save your time</h5>
+            </div>
+        </div>
+        <div class="geostorage">
+            <p>გეოსატორაჟი / Geostorage</p>
+        </div>
+    </div>
+    <div class="info">
+        <tr>
+            <td><b>დოკუმენტი #<br>Document #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+            <td style="margin-bottom: 5px;">{{expireDateChangeObject.Document}}</td>
+        </tr><br>
+        <tr>
+            <td><b>პროექტი #<br>Project #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&emsp;
+            <td>{{expireDateChangeObject.projectName}}</td>
+        </tr><br>
+    </div>
+</div>
+
+<div>
+    <p-table #dt [columns]="columns" [value]="array" [style]="{'width':'100%','overflow':'auto!important'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th [pSortableColumn]="col.field" class="border border-dark" style="font-size: 12px;">
+                        {{ col.label | translate }}
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-expireDateChangeObjectItem>
+            <tr *ngFor="let item of expireDateChangeObjectItem.expire_date_change_list
+            let indexOfelement=index;" [style]="{'font-size': '13px'}">
+                <td [style]="{'text-align':'center'}">{{indexOfelement + 1}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.kit_number}}</td>
+                <td>{{item.batch_no}}</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.existent_date}}</td>
+                <td>{{item.project}}</td>
+                <td>{{item.updated_date}}</td>
+                <td>{{item.comment}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<hr>
+<div class="pageBreak">
+</div>
+
+<div class="footerTop">
+    <p>დოკუმენტი / Document - {{this.expireDateChangeObject['Document']}}</p>
+    <p>დამატებითი ინფორმაცია / Additional Information</p>
+</div>
+<hr>
+
+<div style='margin-bottom: 1px' class="footerBody">
+    <p><b>საწყობი / Warehouse :</b> &emsp;{{this.expireDateChangeObject['WareHouse'] ?
+        this.expireDateChangeObject['WareHouse'] : ''}} <b>, ხელმოწერა / Signature : ________________________</b></p>
+    <p><b>გადაადგილების თარიღი / Moving date :</b>
+        &emsp;{{this.expireDateChangeObject['movingDate'] | date: 'yyyy-MM-dd'}}</p>
+    <p><b>გადამოწმება / Verification :</b> &emsp;{{this.expireDateChangeObject['Verification']}} <b>, ხელმოწერა /
+            Signature : ________________________</b></p>
+    <p style="word-spacing:1px; font-size: medium;">
+        სსპ/SOP-33, ვერსია/Version-01, ფორმა/Form-067
+    </p>
+</div>
+<hr class="border">
+
+<div class="footerFooter">
+    <div class="english">
+        GeoStorage LTD<br>
+        G. Akhvlediani str. Building #3 Tbilisi,0109,Georgia.<br>
+        Contact person Tea Butskhrikidze<br>
+        phone : +995599 488008; +99532 2768970<br>
+        Fax : +99532 2768970<br>
+        Email: tea.butskhrikidze@storagegeo.com<br>
+    </div>
+    <div class="georgian">
+        შპს ჯეოსტორაჟი<br>
+        გ. ახვლედიანის ქ. შენობა #3 თბილისი, 0109, საქართველო.<br>
+        საკონტაქტო პირი თეა ბუცკრიკიძე<br>
+        ტელეფონი : +995599 488008; +99532 2768970<br>
+        ფაქსი : +99532 2768970<br>
+        ელ.ფოსტა: tea.butskhrikidze@storagegeo.com
+    </div>
+</div>

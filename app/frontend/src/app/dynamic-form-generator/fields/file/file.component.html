@@ -1,0 +1,41 @@
+<div [formGroup]="form">
+    <div class="drop-container dropzone" dropZone (hovered)="toggleHover($event)"
+      (dropped)="onChange($event)" [class.hovering]="isHovering">
+      <p class="m-0">
+        Drag a file here or
+        <label class="upload-button">
+          <input type="file" [multiple]="field.multiple" [accept]="field.fileType" (change)="onChange($event)"> browse
+        </label>
+        to upload.
+      </p>
+    </div>
+    <div *ngIf="isShowPreviewImage">
+      <p-carousel *ngIf="field.multiple && preloadedImageArray.length; else singleImage" [value]="preloadedImageArray" [responsiveOptions]="responsiveOptions">
+        <ng-template let-image pTemplate="item" [style]="{'align-item': 'center'}">
+          <div class="card" [style]="{'align-item': 'center'}">
+            <ng-container [ngSwitch]="checkType(image.file)">
+              <img *ngSwitchCase="'.pdf'" class="card-img-top" src="../../../../assets/images/pdf.png">
+              <p *ngSwitchCase="'.pdf'" class="centered">{{display(image.file)}}</p>
+              <img *ngSwitchCase="'.xlsx'" class="card-img-top" src="../../../../assets/images/excel.png">
+              <p *ngSwitchCase="'.xlsx'" class="centered">{{display(image.file)}}</p>
+              <img *ngSwitchDefault class="card-img-top" [src]="image.file" onerror="if (this.src != 'error.jpg') this.src = '../../../../assets/images/default-image.jpg'">
+            </ng-container>
+            <button (click)="deleteImage($event, image)" class="p-button-rounded p-button-warning delete" pButton icon="pi pi-trash" type="button"></button>
+            <p-confirmPopup [key]="'deleteFile'"></p-confirmPopup>
+          </div>
+          <div *ngIf="field.downloadButton" class="download">
+            <a href="{{image.file}}" target="_blank">
+              <span class="p-buttonset">
+                <button class="p-button-rounded" pButton icon="pi pi-download" type="button" [label]="field.labelOnDownload" [style]="{'border-radius': '5px'}"></button>
+              </span>
+            </a>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <ng-template #singleImage>
+      <div class="card" *ngFor="let image of preloadedImage">
+        <img class="card-img-top" [src]="image">
+      </div>
+    </ng-template>
+  </div> 

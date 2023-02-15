@@ -1,0 +1,36 @@
+<div [formGroup]="form">
+  <div *ngIf="!field?.multiline">
+    <div id="field?.name" class="p-inputgroup">
+      <span *ngIf="field?.prefixGroupBy" class="p-inputgroup-addon">
+        {{field?.prefixGroupByText}}
+        <i *ngIf="field?.prefixGroupByIcon" class="pi {{field?.prefixGroupByIcon}}"></i>
+      </span>
+      <input [attr.type]="field?.type" class="form-control" [id]="field?.name" [name]="field?.name" [formControlName]="field?.name"
+      pInputText [placeholder]="field?.placeholder" [pValidateOnly]="!field?.keyFilter" pKeyFilter="{{field?.keyFilter ? field?.keyFilter : 'alphanum'}}" [class.ng-invalid]="!isValid" [class.ng-dirty]="!isValid"
+      [readonly]="field?.readonly" [pTooltip]="field?.toolTip" [tooltipPosition]="field?.tooltipPosition">
+      
+      <span *ngIf="field?.suffixGroupBy" class="p-inputgroup-addon">
+        {{field?.suffixGroupByText}}
+        <i *ngIf="field?.suffixGroupByIcon" class="pi {{field?.suffixGroupByIcon}}"></i>
+      </span>
+      <button *ngIf="field?.suffixActionGroupBy" type="button" pButton pRipple icon="pi {{field?.suffixActionGroupByIcon}}" 
+        styleClass="p-button-danger" (click)="field?.onSuffixActionGroupByClick($event)"></button> 
+    </div>
+    
+    <div *ngIf="inValid && (isDirty || isTouched)" class="p-error block">
+      <small *ngIf="isError" >{{errorText}}</small> 
+    </div>
+  </div>
+  <div *ngIf="field?.multiline">
+    <textarea pInputTextarea [formControlName]="field?.name" [id]="field?.name"
+    rows="9" cols="100" class="form-control" [placeholder]="field?.placeholder"  [class.ng-invalid]="!isValid" [class.ng-dirty]="!isValid" [readonly]="field?.readonly"></textarea>
+    <div *ngIf="inValid && (isDirty || isTouched)" class="p-error block">
+      <small *ngIf="isError" >{{errorText}}</small> 
+    </div>
+  </div>
+  <!-- <div *ngIf="field?.calculate" class="p-inputgroup">
+    <input [attr.type]="field?.type" class="form-control" [id]="field?.name" [name]="field?.name" [formControlName]="field?.name"
+      pInputText [placeholder]="field?.placeholder" [pValidateOnly]="!field?.keyFilter" pKeyFilter="{{field?.keyFilter ? field?.keyFilter : 'alphanum'}}" [class.ng-invalid]="!isValid" [class.ng-dirty]="!isValid"
+      [readonly]="field?.readonly" > -->
+  <!-- </div> -->
+</div>

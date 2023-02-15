@@ -1,0 +1,20 @@
+<div class="form-group row" [formGroup]="form" [hidden]="field.hidden">
+    <label class="col-md-3 form-control-label" [attr.for]="field.label">
+      {{field.label}}
+      <strong class="p-error block" *ngIf="field.required">*</strong>
+    </label>
+    <div class="col-md-9" [ngSwitch]="field.type">
+      <textbox *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
+      <dropdown *ngSwitchCase="'dropdown'" [field]="field" [form]="form"></dropdown>
+      <checkbox *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox>
+      <radio *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>
+      <file *ngSwitchCase="'file'" [field]="field" [form]="form"></file>
+      <date *ngSwitchCase="'date'" [field]="field" [form]="form"></date>
+      <autocomplete *ngSwitchCase="'autocomplete'" [field]="field" [form]="form"></autocomplete>
+      <slide-toggle *ngSwitchCase="'boolean'" [field]="field" [form]="form"></slide-toggle>
+      <p-file *ngSwitchCase="'p-file'" [field]="field" [form]="form"></p-file>
+      <table-field *ngSwitchCase="'table'" [form]="form" [columnSchema]="field.columnSchema" [field]="field"
+      [formName]="field.name" [formSchema]="field.formSchema" [dataSource]="field.dataSource"
+       [formInitialise]="field.formInitialise" [dataKey]="field.dataKey"></table-field>
+    </div>
+  </div>

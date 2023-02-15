@@ -1,0 +1,9 @@
+<p-tabView>
+    <p-tabPanel *ngFor="let field of fields; let i=index" [header]="headerTextArray[i]">
+        <div fxLayout="row wrap" fxLayoutGap="0.75rem">
+            <div class="field-container" [fxFlex]="(field?.type !== 'table') ? 48 : 100">
+                <dynamic-field-builder [field]="field" [form]="form"></dynamic-field-builder>
+            </div>
+        </div>
+    </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,88 @@
+<div class="page company-main-container" fxLayout="column" fxLayoutGap="5px">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="{{'new_TC' | translate}}" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showStudyMaterialReturnModifier = true"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="{{ 'export_TC' | translate}}" icon="pi pi-upload" class="p-button-help"(click)="export(dt)"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [columns]="columns" [value]="studyMaterialList" [rows]="10" [paginator]="true" 
+    [globalFilterFields]="['Invoice', 'Weight', 'Size', 'projectName', 'Protocol', 'supplier', 'recipient']"
+        [(selection)]="selectedStudyMaterial" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="{{translate.instant('entityTablePage_TC', {first: '{first}', last: '{last}', totalRecords: '{totalRecords}'})}}" [showCurrentPageReport]="true"
+        [scrollable]="true" scrollHeight="400px" scrollDirection="both">
+        <ng-template pTemplate="caption">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 class="p-m-0">{{ getTitlePage() }}</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="globalSearch($event, dt)" placeholder="{{ 'search_TC' | translate}}" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem" pFrozenColumn>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let col of columns" >
+                    <th [pSortableColumn]="col?.field">
+                        {{ col?.label | translate }} <p-sortIcon [field]="col?.field"></p-sortIcon>
+                        <p-columnFilter type="text" [field]="col?.field" display="menu"></p-columnFilter>
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-studyMaterialItem>
+            <tr>
+                <td pFrozenColumn>
+                    <p-tableCheckbox [value]="studyMaterialItem"></p-tableCheckbox>
+                </td>
+                <td>{{studyMaterialItem.supplier}}</td>
+                <td>{{studyMaterialItem.recipient}}</td>
+                <td>{{studyMaterialItem.Invoice }}</td>
+                <!-- <td>{{studyMaterialItem.poDate| date:'shortDate'}}</td>
+                <td>{{studyMaterialItem.supplierInvoiceNumber}}</td>
+                <td>{{studyMaterialItem.supplierDocketNo }}</td> -->
+                <td>{{studyMaterialItem.Weight}}</td>
+                <td>{{studyMaterialItem.Size}}</td>
+                <!-- <td>{{studyMaterialItem.supplierAddress }}</td>
+                <td>{{studyMaterialItem.deliveryChallanNo}}</td>
+                <td>{{studyMaterialItem.corgoType}}</td>
+                <td>{{studyMaterialItem.boxQty}}</td> -->
+                <td>{{studyMaterialItem.Protocol }}</td>
+                <td>{{studyMaterialItem.projectName}}</td>
+                <!-- <td>{{studyMaterialItem.awb}}</td>
+                <td>{{studyMaterialItem.sponsor}}</td>
+                <td>{{studyMaterialItem.portocol }}</td>
+                <td>{{studyMaterialItem.project}}</td>
+                <td>{{studyMaterialItem.weight }}</td>
+                <td>{{studyMaterialItem.size}}</td> -->
+                <td pFrozenColumn alignFrozen="right" [frozen]="true">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editMaterialReturn(studyMaterialItem)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteStudyMaterialReturn($event, studyMaterialItem)"></button>
+                    <p-confirmPopup [key]="'deleteItem'"></p-confirmPopup>
+                    <button pButton pRipple icon="pi pi-print" class="p-button-rounded p-button-info"
+                    (click)="printmaterialReceipt(studyMaterialItem)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                {{'entityTableFooter_TC' | translate}} {{studyMaterialList ? studyMaterialList.length : 0 }} {{'studymaterialreturnCreation_TC' | translate}}.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+<p-sidebar [(visible)]="showStudyMaterialReturnModifier" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearStudyMaterialReturn()">
+
+    <h1 style="font-weight:normal">{{ getTitleModifier() }}</h1>
+    <dynamic-form-builder [fields]="getFields()" (onSubmit)="saveStudyMaterialReturn($event)"></dynamic-form-builder>
+
+</p-sidebar>
+<p-sidebar [(visible)]="showmaterialReceiptPrintModifier" [fullScreen]="true" [baseZIndex]="10000">
+    <app-receipt-builder [fields]="getPrintFields()"></app-receipt-builder>
+</p-sidebar>

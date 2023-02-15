@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="19f7805d-5493-4bb4-9d7f-802ce47c5f59" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/apps/masters/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/masters/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/med/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/med/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/ppc/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/ppc/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2L4UZOg4MNZTXemlhk4izbmj8nn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/SanadiTech/viora-2.0-server/VioraServer/VioraServer"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="19f7805d-5493-4bb4-9d7f-802ce47c5f59" name="Changes" comment="" />
+      <created>1675129902324</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675129902324</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/audit_fields/models/audit_model_mixin.py</url>
+          <line>78</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

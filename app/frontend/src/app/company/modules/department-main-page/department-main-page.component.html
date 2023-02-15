@@ -1,0 +1,120 @@
+<div class="page company-main-container" fxLayout="column" fxLayoutGap="5px">
+    <p-toolbar>
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="{{'new_TC' | translate}}" icon="pi pi-plus" class="p-button-success"
+                (click)="showDepartmentModifier = true"></button>
+            <!-- <button pButton pRipple label="{{'delete_TC' | translate}}" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedDepartments($event)" [disabled]="!selectedDepartments || !selectedDepartments.length"></button>
+            <p-confirmPopup [key]="'deleteSelectedItem'"></p-confirmPopup> -->
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="{{ 'export_TC' | translate}}" icon="pi pi-upload" class="p-button-help"
+                (click)="export(dt)"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [columns]="columns" [value]="departmentList" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['departmentName', 'headOfDepartment', 'contactEmail', 'phoneNumber', 'created', 'modified']" [(selection)]="selectedDepartments"
+        [rowHover]="true" dataKey="id" currentPageReportTemplate="{{translate.instant('entityTablePage_TC', {first: '{first}', last: '{last}', totalRecords: '{totalRecords}'})}}"
+        [showCurrentPageReport]="true" [scrollable]="true" scrollHeight="400px" scrollDirection="both">
+        <ng-template pTemplate="caption">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h3>{{getTitlePage()}}</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="globalSearch($event, dt)"
+                        placeholder="{{ 'search_TC' | translate}}" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem;" pFrozenColumn>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let col of columns">
+                    <th *ngIf="col.type !== 'date'" [pSortableColumn]="col.field">
+                        {{ col.label | translate }} <p-sortIcon [field]="col.field"></p-sortIcon>
+                        <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
+                    </th>
+                    <th *ngIf="col.type == 'date'" [pSortableColumn]="col.field">
+                        {{ col.label | translate }}
+                         <p-sortIcon [field]="col.field" display="menu"></p-sortIcon>
+                        <!-- <p-columnFilter type="date" [field]="col.field" display="menu"></p-columnFilter> -->
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-departmentItem>
+            <tr>
+                <td pFrozenColumn>
+                    <p-tableCheckbox [value]="departmentItem"></p-tableCheckbox>
+                </td>
+                <td>{{departmentItem.departmentName}}</td>
+                <td>{{departmentItem.contactEmail}}</td>
+                <td>{{departmentItem.phoneNumber}}</td>
+                <td>{{departmentItem.headOfDepartment}}</td>
+                <!-- <td>{{departmentItem.created | date: 'short'}}</td>
+                <td>{{departmentItem.modified | date: 'short'}}</td> -->
+                <td>{{departmentItem.created.substring(0, 10)}}</td>
+                <td>{{departmentItem.modified.substring(0, 10)}}</td>
+                <td pFrozenColumn alignFrozen="right" [frozen]="true">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                        (click)="editDepartment(departmentItem)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteDepartment($event, departmentItem)"></button>
+                    <p-confirmPopup [key]="'deleteItem'"></p-confirmPopup>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <!-- <div> -->
+            {{'entityTableFooter_TC' | translate}} {{departmentList ? departmentList.length : 0}} {{'department_TC' | translate}}
+            <!-- </div> -->
+        </ng-template>
+    </p-table>
+</div>
+<p-sidebar [(visible)]="showDepartmentModifier" position="right" [baseZIndex]="10000" (onHide)="clearDepartment()">
+    <h1 style="font-weight: normal;">{{getTitleModifier()}}</h1>
+    <dynamic-form-builder [fields]="getFields()" (onSubmit)="saveDepartment($event)" [fullScreen]="false">
+    </dynamic-form-builder>
+</p-sidebar>
+
+<!-- <div class="page company-log-container" fxLayout="column" fxLayoutGap="5px">
+    <p-table #dt [columns]="columns" [value]="departmentList" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['created', 'modified']" [(selection)]="selectedDepartments"
+        [rowHover]="true" dataKey="id" currentPageReportTemplate="{{translate.instant('entityTablePage_TC', {first: '{first}', last: '{last}', totalRecords: '{totalRecords}'})}}"
+        [showCurrentPageReport]="true" [scrollable]="true" scrollHeight="400px" scrollDirection="both">
+        <ng-template pTemplate="caption">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h3>{{getTitlePage()}}</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="globalSearch($event, dt)"
+                        placeholder="{{ 'search_TC' | translate}}" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem;" pFrozenColumn>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let col of logs">
+                    <th [pSortableColumn]="col.field">
+                        {{ col.label | translate }} <p-sortIcon [field]="col.field"></p-sortIcon>
+                        <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-departmentItem>
+            <tr>
+                <td>{{departmentItem.created}}</td>
+                <td>{{departmentItem.modified}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->

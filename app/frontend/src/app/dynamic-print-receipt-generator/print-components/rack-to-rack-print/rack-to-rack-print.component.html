@@ -1,0 +1,61 @@
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>{{rackObject.rack_to_rack_list[0].fromRack}} თაროდან / From Rack {{rackObject.rack_to_rack_list[0].fromRack}}</b></legend>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>{{rackObject.rack_to_rack_list[0].toRack}} თაროზე / To Rack {{rackObject.rack_to_rack_list[0].toRack}}</b></legend>
+        </fieldset>
+    </div>
+</div>
+<div class="container">
+    <div class="logo">
+        <img src="../../../../assets//images/edit2.png" alt="logo">
+        <h5>Trust and save your time</h5>
+    </div>
+    <div class="info">
+        <p><b>ინვოისი / Document # :</b> &nbsp;&emsp;&nbsp;&emsp;{{rackObject.document}}</p>
+        <p><b>ინვოისი ში / project # :</b> &nbsp;&emsp;&nbsp;&emsp;{{rackObject.project}}</p>
+    </div>
+</div>
+<div class="geostorage">
+    <p>გეოსთრაგება / Geostorage</p>
+</div>
+<div>
+    <p-table #dt [columns]="columns" [value]="array">
+        <ng-template pTemplate="caption">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th [pSortableColumn]="col.field" class="border border-dark">
+                        {{ col.label | translate }}
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-acceptanceObjectItem>
+            <tr *ngFor="let item of acceptanceObjectItem.rack_to_rack_list let indexOfelement=index;">
+                <td>{{indexOfelement + 1}}</td>
+                <td>{{item.product}}</td>
+                <td>{{item.kitNumber}}</td>
+                <td>{{item.batchNumber}}</td>
+                <td>{{item.serialNumber}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.fromRack}}</td>
+                <td>{{item.fromShelf}}</td>
+                <td>{{item.toShelf}}</td>
+                <td>{{item.toRack}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<hr>
+<div class="pageBreak">
+</div>

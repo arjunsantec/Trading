@@ -1,0 +1,30 @@
+{
+    "CompanyName": "customerNAME_UC",
+    "CompanyLogoLight": "",
+    "CompanyLogoDark": "",
+    "AvailableLocale": [
+        {
+            "id": "en",
+            "name": "English"
+        },
+        {
+            "id": "ka",
+            "name": "georgian"
+        }
+    ],
+    "LayerConfig": {
+        "App": {
+            "topBar": true,
+            "footer": true
+        },
+        "TopBar": {
+            "profile": true,
+            "theme": true,
+            "language": true,
+            "fontSizer": true,
+            "logo": true,
+            "logoText": true,
+            "menu": true
+        }
+    }
+}

@@ -1,0 +1,167 @@
+<div class="header">
+    <p>ფორმა 051_სასწავლო მასალების დაბრუნება</p>
+    <p>Form 051_Return Of Study Materials</p>
+</div>
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>მიმწოდებელი/Supplier</b></legend>
+            <p><b>სახელი / Name :</b> {{studyreturnObject.supplier}}</p>
+            <p><b>მისამართი / Address :</b> {{studyreturnObject.supplierAddress}}</p>
+            <p><b>ტელეფონი / Phone :</b> {{studyreturnObject.supplierPhone}}</p>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>მიმღები/Recipient</b></legend>
+            <p><b>სახელი / Name :</b> {{studyreturnObject.recipient}}</p>
+            <p><b>მისამართი / Address :</b> {{studyreturnObject.recipientAddress}}</p>
+            <p><b>ტელეფონი / Phone :</b> {{studyreturnObject.recipientPhone}}</p>
+        </fieldset>
+    </div>
+</div>
+
+<div fxLayout="row">
+    <div fxFlex="50">
+        <div class="container">
+            <div class="logo">
+                <img src="../../../../assets//images/edit2.png" alt="logo">
+                <h5>Trust and save your time</h5>
+            </div>
+        </div>
+        <div class="geostorage">
+            <p>გეოსატორაჟი / Geostorage</p>
+        </div>
+    </div>
+</div>
+
+<div class="info">
+    <tr>
+        <td><b>ინვოისი #<br>Invoice #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+        <td>{{studyreturnObject.Invoice}}</td>
+    </tr><br>
+    <tr>
+        <td><b>ადგილების რაოდ<br>No of Places</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+        <td>{{studyreturnObject.numberOfPlace}}</td>
+    </tr><br>
+</div>
+
+<div>
+    <p-table #dt [columns]="columns" [value]="array" [style]="{'width':'100%','overflow':'auto!important'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th [style]="{'font-size': '12px'}">
+                        <b>{{ col.label | translate }}</b>
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-studyreturnObjectItem>
+            <tr *ngFor="let item of studyreturnObjectItem.study_material_return_list let indexOfelement=index;"
+            [style]="{'font-size': '13px'}">
+                <td [style]="{'text-align':'center'}">{{indexOfelement + 1}}</td>
+                <td>{{item.productName}}</td>
+                 <!-- <td>{{item.product_code}}</td> -->
+                <td>{{item.kit_number}}</td>
+                <td>{{item.batch_no}}</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.comment}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>სპონსორი&nbsp;<br>Sponsor&nbsp;&nbsp; </b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+                    <td>{{studyreturnObject.sponsorName}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროტოკოლი #<br>Protocol #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+                    <td>{{studyreturnObject.Protocol}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროექტი #<br>Project #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{studyreturnObject.projectName}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>წონა<br>Weight </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{studyreturnObject.Weight}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>ზომა <br>Size </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;
+                    <td>{{studyreturnObject.Size}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<hr>
+
+<div class="pageBreak">
+</div>
+
+<div class="footerTop">
+    <p>ინვოისი / Invoice - {{this.studyreturnObject['Invoice']}}</p>
+    <p>დამატებითი ინფორმაცია / Additional Information</p>
+</div>
+<hr>
+
+<div style='margin-bottom: 1px' class="footerBody">
+    <div style="font-size: 12px;">
+        <p><b>კურიერი / Courier :</b> &emsp; {{this.studyreturnObject['Courier']}} , <b>ხელმოწერა / Signature : ________________________</b></p>
+        <p><b>მიმღები / Recipient :</b> &emsp; {{this.studyreturnObject['recipient']}} , <b>ხელმოწერა / Signature : ________________________</b></p>
+        <p><b>წამოღების თარიღი / Pickup date :</b> &emsp; {{this.studyreturnObject['pickUpDate'] | date: 'yyyy-MM-dd'}}, <b>წამოღების დრო/Pickup Time : &emsp;{{this.studyreturnObject['pickUpDate'] | date: 'hh:mm:ss a'}}</b></p>
+        <p><b>მიღების თარიღი / Income date :</b> &emsp; {{this.studyreturnObject['incomeDate'] | date: 'yyyy-MM-dd'}}, <b>მიღების დრო/Income Time :  &emsp; {{this.studyreturnObject['incomeDate'] | date: 'hh:mm:ss a'}}</b></p>
+    </div>
+    <p class="footer-text">
+        ამ გადაზიდვის შინაარსი გამოვლენილია მხოლოდ კლინიკური კვლევის გამოყენებისათვის და უნდა იქნას გამოყენებული მხოლოდ
+        კლინიკურ კვლევებში ჩარიცხული პაციენტების მკურნალობისთვის. არ არის კომერციული ღირებულება. არა იყიდება ან იყიდება.
+        გადაზიდვა უფასოდ უნდა გადაეცეს
+    </p>
+    <p class="footer-text" style="word-spacing:1px;">
+        The content of this shipment is identified for clinical trial use only and must be used solely for the treatment
+        of patients enrolled in clinical trials. No commercial value. Not for sale or resale. Shipment must be hand
+        overed on free of charge basis
+    </p>
+    <p style="word-spacing:1px; font-size: medium;">
+    სსპ/SOP-07, ვერსია/Version-04, ფორმა/Form-051
+    </p>
+</div>
+<hr class="border">
+
+<div class="footerFooter">
+    <div class="english">
+        GeoStorage LTD<br>
+        G. Akhvlediani str. Building #3 Tbilisi,0109,Georgia.<br>
+        Contact person Tea Butskhrikidze<br>
+        phone : +995599 488008; +99532 2768970<br>
+        Fax : +99532 2768970<br>
+        Email: tea.butskhrikidze@storagegeo.com<br>
+    </div>
+    <div class="georgian">
+        შპს ჯეოსტორაჟი<br>
+        გ. ახვლედიანის ქ. შენობა #3 თბილისი, 0109, საქართველო.<br>
+        საკონტაქტო პირი თეა ბუცკრიკიძე<br>
+        ტელეფონი : +995599 488008; +99532 2768970<br>
+        ფაქსი : +99532 2768970<br>
+        ელ.ფოსტა: tea.butskhrikidze@storagegeo.com
+    </div>
+</div>

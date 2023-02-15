@@ -1,0 +1,159 @@
+<div class="header">
+    <p>ფორმა 053_სასწავლო მასალების განადგურება</p>
+    <p>Form 053_Destruction of Study Materials</p>
+</div>
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>Კლიენტი/The Client</b></legend>
+            <p><b>სახელი/Name :</b> {{distructStudyMaterialObject.client}}</p>
+            <p><b>მისამართი/Address :</b> {{distructStudyMaterialObject.clientAddress}}</p>
+            <p><b>ტელეფონი/Phone :</b> {{distructStudyMaterialObject.clientPhone}}</p>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>Მომსახურების მიმწოდებელი/<br>Service provider</b></legend>
+            <p><b>სახელი/Name :</b> {{distructStudyMaterialObject.serviceProvider}}</p>
+            <p><b>მისამართი/Address :</b> {{distructStudyMaterialObject.serviceProviderAddress}}</p>
+            <p><b>ტელეფონი/Phone :</b> {{distructStudyMaterialObject.serviceProviderPhone}}</p>
+        </fieldset>
+    </div>
+</div>
+<div fxLayout="row">
+    <div fxFlex="50">
+        <div class="container">
+            <div class="logo">
+                <img src="../../../../assets//images/edit2.png" alt="logo">
+                <h5>Trust and save your time</h5>
+            </div>
+        </div>
+        <div class="geostorage">
+            <p>გეოსატორაჟი / Geostorage</p>
+        </div>
+    </div>
+    <div class="info">
+        <tr>
+            <td><b>დოკუმენტი #<br>Document #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+            <td>{{distructStudyMaterialObject.Document}}</td>
+        </tr><br>
+        <tr>
+            <td><b>საიტი #<br>Site #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+            <td>{{distructStudyMaterialObject.Site}}</td>
+        </tr><br>
+        <tr>
+            <td><b>ადგილის რაოდენობა<br>Number Of Places</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+            <td>{{distructStudyMaterialObject.numberOfPlace}}</td>
+        </tr>
+    </div>
+</div>
+
+<div>
+    <p-table #dt [columns]="columns" [value]="array" [style]="{'width':'100%','overflow':'auto!important'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th [style]="{'font-size': '12px'}">
+                        {{ col.label | translate }}
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-distructStudyMaterialObjectItem>
+            <tr *ngFor="let item of distructStudyMaterialObjectItem.study_material_destruction_list let indexOfelement=index;"
+            [style]="{'font-size': '13px'}">
+                <td [style]="{'text-align':'center'}">{{indexOfelement + 1}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.kit_number}}</td>
+                <td>{{item.batch_no}}</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.temp}}</td>
+                <td>{{item.expiry_date}}</td>
+                <td>{{item.note}}</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>სპონსორი<br>Sponsor </b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+                    <td>{{distructStudyMaterialObject.sponsorName}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროტოკოლი #<br>Protocol #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+                    <td>{{distructStudyMaterialObject.Protocol}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროექტი #<br>Project #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{distructStudyMaterialObject.projectName}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>წონა<br>Full Weight </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{distructStudyMaterialObject.fullWeight}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>ზომა <br>Full Size </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;
+                    <td>{{distructStudyMaterialObject.fullSize}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="requestForm">
+    <h5><b>Request form / order:</b></h5><br>
+    <p class="textWrap">{{distructStudyMaterialObject.testNote}}</p>
+</div>
+
+<div class="pageBreak">
+</div>
+
+<div class="footerTop">
+    <p>დოკუმენტი / Document - {{this.distructStudyMaterialObject['Document']}}</p>
+    <p>დამატებითი ინფორმაცია / Additional Information</p>
+</div>
+<hr>
+
+<div style='margin-bottom: 1px' class="footerBody">
+    <p>შენახვის ლოგისტიკის მენეჯერი / Storage Logistic Manager : {{this.distructStudyMaterialObject['storageLogisticManager']}}</p>
+    <p>განადგურების პროვაიდერი / Destruction provider : {{this.distructStudyMaterialObject['destructionProvider']}}</p>
+    <p>განადგურების თარიღი / Destruction date : {{this.distructStudyMaterialObject['destructionDate'] | date: 'yyyy-MM-dd'}}</p>
+    <p style="word-spacing:1px; font-size: medium;">
+    სსპ / SOP-10 , ვერსია / Version-04, ფორმა / Form-053
+    </p>
+</div>
+<hr class="border">
+
+<div class="footerFooter">
+    <div class="english">
+        GeoStorage LTD<br>
+        G. Akhvlediani str. Building #3 Tbilisi,0109,Georgia.<br>
+        Contact person Tea Butskhrikidze<br>
+        phone : +995599 488008; +99532 2768970<br>
+        Fax : +99532 2768970<br>
+        Email: tea.butskhrikidze@storagegeo.com<br>
+    </div>
+    <div class="georgian">
+        შპს ჯეოსტორაჟი<br>
+        გ. ახვლედიანის ქ. შენობა #3 თბილისი, 0109, საქართველო.<br>
+        საკონტაქტო პირი თეა ბუცკრიკიძე<br>
+        ტელეფონი : +995599 488008; +99532 2768970<br>
+        ფაქსი : +99532 2768970<br>
+        ელ.ფოსტა: tea.butskhrikidze@storagegeo.com
+    </div>
+</div>

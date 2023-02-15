@@ -1,0 +1,54 @@
+<div class="container" style="margin:1rem ;">
+    <div fxLayout="column" fxLayout fxLayoutGap="10px">  
+        <div fxFlex="30">
+            <p-card styleClass="overview-box-1" >
+               {{'numberOfWarehouse_TC' | translate}}<h1>{{wareHouseCount}}</h1>
+            </p-card>
+        </div>  
+        <div fxFlex="30">
+            <p-card styleClass="overview-box-1">
+                {{'numberOfRacks_TC' | translate}}<h1>{{rackCount}}</h1>
+            </p-card>
+        </div>  
+        <div fxFlex="30">
+            <p-card styleClass="overview-box-1">
+                {{'numberOfShelfs_TC' | translate}}<h1>{{shelfCount}}</h1>
+            </p-card>
+        </div>  
+        <div fxFlex="30">
+            <p-card styleClass="overview-box-1">
+                {{'currentFilledCapacity_TC' | translate}}<h1>{{getOccupied()}}%</h1>
+            </p-card>
+        </div>  
+    </div>  <hr>
+    <div fxLayout="column" fxLayout fxLayoutGap="10px">  
+        <div fxFlex="50">
+            <p-panel header="{{'recentMaterialReceipts_TC' | translate}}" [toggleable]="true">
+                <p-table [value]="materialReceiptList" >
+                    <!-- [tableStyle]="{'min-width': '50rem'}" -->
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{'Invoice_TC' | translate}} #</th>
+                            <th>{{'invoiceDate_TC' | translate}}</th>
+                            <th>{{'numberOfItems_TC' | translate}}</th>
+                            <th>{{'status_TC' | translate}}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-materialReceipt>
+                        <tr>
+                            <td>{{materialReceipt.invoice}}</td>
+                            <td>{{materialReceipt.receiveDate| date:'short'}}</td>
+                            <td>{{materialReceipt.grn_details.length}}</td>
+                            <td>{{materialReceipt.isApproved}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-panel>
+        </div>  
+        <div fxFlex="50">
+            <p-panel header="{{'notifications_TC' | translate}}" [toggleable]="true">
+                {{'noDataAvailable_TC' | translate}}
+            </p-panel>
+        </div>
+    </div> 
+    </div>

@@ -1,0 +1,136 @@
+<div class="page company-main-container" fxLayout="column" fxLayoutGap="5px"> 
+    <p-toolbar>
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="{{'new_TC' | translate}}" icon="pi pi-plus" class="p-button-success" (click)="showProductMasterModifier = true"></button>
+            <!-- <button pButton pRipple label="{{'delete_TC' | translate}}" icon="pi pi-trash" class="p-button-danger"></button> -->
+        </ng-template>
+        <ng-template pTemplate="right"> 
+            <button pButton pRipple label="{{ 'export_TC' | translate}}" icon="pi pi-upload" class="p-button-help" (click)="export(dt)"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [columns]="columns" [value]="productMasterList" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['productName', 'productCode', 'usageType', 'safetyStockLevel']"
+    [(selection)]="selectedProductMasters" [rowHover]="true" dataKey="id" [lazy]="false"
+    currentPageReportTemplate="{{translate.instant('entityTablePage_TC', {first: '{first}', last: '{last}', totalRecords: '{totalRecords}'})}}"
+    [showCurrentPageReport]="true" [scrollable]="true" scrollHeight="400px" scrollDirection="both">
+        <ng-template pTemplate="caption"> 
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h3>{{getTitlePage()}}</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="globalSearch($event, dt)" placeholder="{{ 'search_TC' | translate}}"/>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem;" pFrozenColumn>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let col of columns">
+                    <th [pSortableColumn]="col.field">
+                        {{col.label | translate }} <p-sortIcon [field]="col.field"></p-sortIcon>
+                        <p-columnFilter type="text" [field]="col.field" display="menu"></p-columnFilter>
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-productMasterItem>
+            <tr>
+                <td pFrozenColumn>
+                    <p-tableCheckbox [value]="productMasterItem"></p-tableCheckbox>
+                </td>
+                <!-- <td>{{productMasterItem.productCategory}}</td>
+                <td>{{productMasterItem.productSubCategory}}</td>
+                <td>{{productMasterItem.units}}</td> -->
+                <td>{{productMasterItem.productName}}</td>
+                <td>{{productMasterItem.productCode}}</td>
+                <td>{{productMasterItem.usageType}}</td>
+                <td>{{productMasterItem.safetyStockLevel}}</td>
+                <!-- <td>
+                    <img [src]="productMasterItem.productImages" [alt]="productMasterItem.productName" class="product-image"/>
+                </td> -->
+                <!-- <td>{{productMasterItem.priceMethod}}</td>
+                <td>{{productMasterItem.basePrice}}</td>
+                <td>{{productMasterItem.taxGst}}</td>
+                <td>{{productMasterItem.totalPrice}}</td>
+                <td>{{productMasterItem.salesMargin}}</td>
+                <td>{{productMasterItem.typeBasePrice}}</td>
+                <td>{{productMasterItem.salesBasePrice}}</td>
+                <td>{{productMasterItem.salesGst}}</td>
+                <td>{{productMasterItem.salesPrice}}</td>
+                <td>{{productMasterItem.maxPerDis}}</td>
+                <td>{{productMasterItem.maxAmtDis}}</td> -->
+                <!-- <td>{{productMasterItem.type}}</td>
+                <td>{{productMasterItem.country}}</td>
+                <td>{{productMasterItem.technical_specification}}</td>
+                <td>{{productMasterItem.hsn}}</td> -->
+                <td>{{productMasterItem.created | date: 'short'}}</td>
+                <td>{{productMasterItem.modified | date: 'short'}}</td>
+                <td pFrozenColumn alignFrozen="right" [frozen]="true">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editProductMaster(productMasterItem)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProductMaster($event, productMasterItem)"></button>
+                    <p-confirmPopup [key]="'deleteItem'"></p-confirmPopup>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            {{'entityTableFooter_TC' | translate}} {{productMasterList ? productMasterList.length : 0}} {{'productMaster_TC' | translate}}.
+        </ng-template>
+    </p-table>
+</div>
+<p-sidebar [(visible)]="showProductMasterModifier" [fullScreen]="true" [baseZIndex]="99" (onHide)="clearProductMaster()">
+    <h1 style="font-weight: normal;">{{getTitleModifier()}}</h1>
+    <dynamic-form-builder [fields]="getFields()" (onSubmit)="saveProductMaster($event)"></dynamic-form-builder>
+    <div *ngIf="show" class="page company-main-container" fxLayout="column" fxLayoutGap="5px">
+    <p-table  [value]="receipt_list" [rows]="10" [paginator]="true"
+    [rowHover]="true" dataKey="id" [lazy]="false"
+    currentPageReportTemplate="{{translate.instant('entityTablePage_TC', {first: '{first}', last: '{last}', totalRecords: '{totalRecords}'})}}"
+    [showCurrentPageReport]="true" [scrollable]="true" scrollHeight="400px" scrollDirection="both">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem;" pFrozenColumn>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let c of col">
+                    <th [pSortableColumn]="c.field">
+                        {{c.label | translate }} <p-sortIcon [field]="c.field"></p-sortIcon>
+                        <p-columnFilter type="text" [field]="c.field" display="menu"></p-columnFilter>
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-materialItem>
+            <tr>
+                <td pFrozenColumn>
+                    <p-tableCheckbox [value]="materialItem"></p-tableCheckbox>
+                </td>
+                <td>{{materialItem.productName}}</td>
+                <!-- <td>{{materialItem.productCode}}</td> -->
+                <td>{{materialItem.trc_no}}</td>
+                <td>{{materialItem.trc_date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{materialItem.kit_no}}</td>
+                <td>{{materialItem.batch_no}}</td>
+                <td>{{materialItem.serial_number}}</td>
+                <td>{{materialItem.available_qty}}</td>
+                <td>{{materialItem.wareHouseName}}</td>
+                <td>{{materialItem.zoneName}}</td>
+                <td>{{materialItem.rackName}}</td>
+                <td>{{materialItem.shelfName}}</td>
+            </tr>
+        </ng-template>
+        <!-- <ng-template pTemplate="header">
+            <tr>
+                <th>Vin</th>
+                <th>Year</th>
+                <th>Brand</th>
+                <th>Color</th>
+            </tr>
+        </ng-template> -->
+    </p-table>
+</div>
+</p-sidebar>
+

@@ -1,0 +1,10 @@
+<p-fieldset [toggleable]="true">
+  <ng-template pTemplate="header">{{header}}</ng-template>
+  <div fxLayout="row wrap" fxLayoutGap="0.75rem">      
+    <div class="field-container" [fxFlex]="fillScreen ? 100 : 48" *ngFor="let field of fields">
+      <dynamic-field-builder [field]="field" [form]="form"></dynamic-field-builder>
+    </div>
+  </div>
+</p-fieldset>
+ 
+ 

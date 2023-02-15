@@ -1,0 +1,14 @@
+{
+    "LayerConfig": {
+        "Home": {
+            "Aggregation": true,
+            "Charts": true
+        },
+        "Aggregation": {
+
+        },
+        "Charts": {
+
+        }
+    }
+}

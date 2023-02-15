@@ -1,0 +1,10 @@
+
+<div [formGroup]="form">
+    <p-calendar [inputId]="field?.name" [formControlName]="field?.name" [showIcon]="true" [timeOnly]="field?.timeOnly"
+    [selectionMode]="field?.selectionMode ? field?.selectionMode : 'single'" [disabled]="field?.disabled"
+    [showTime]="field.showTime" appendTo="body"></p-calendar>
+    <div *ngIf="inValid && (isDirty || isTouched)" class="p-error block">
+      <small *ngIf="isError" >{{errorText}}</small> 
+    </div>
+</div>
+<!-- utc="true" -->

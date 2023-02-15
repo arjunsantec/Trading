@@ -1,0 +1,27 @@
+.list {
+    list-style-type: none;
+    margin-top: 40px;
+    li {
+        background-color: #ddd;
+        padding: 0 10px;
+        margin: 0 15px;
+        border-radius: 5px;
+        p {
+            font-weight: bold;
+        }
+    }
+
+    li:hover {
+        background-color: #aaa;
+        p {
+            color: #fff;
+        }
+    }
+}
+
+.href {
+    margin: 200px auto;
+    a:hover {
+        text-decoration: underline;
+    }
+}

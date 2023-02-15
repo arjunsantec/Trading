@@ -1,0 +1,15 @@
+.productCategory-main-container {
+    button {
+        margin: 2px;
+    }
+    tr {
+        th, td:not(.p-frozen-column) {
+            width: 250px;
+        }
+        td {
+            .product-image {
+                width: 100px;
+            }
+        }
+    }
+}

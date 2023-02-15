@@ -1,0 +1,71 @@
+<div fxLayout="column">
+    <button type="button" class="p-button-text" pButton pRipple icon="pi pi-home" *ngIf="isUserLoggedIn()" label="{{ 'home_TC' | translate }}" routerLink="/home"></button>
+    <button type="button" class="p-button-text" pButton pRipple icon="pi pi-sign-in" *ngIf="!isUserLoggedIn()" label="{{ 'login_TC' | translate }}" routerLink="/login"></button>
+
+<p-accordion [multiple]="false">
+    <p-accordionTab header="{{ 'company_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-prime" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'company_TC' | translate }}" routerLink="/company"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-users" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'companyUser_TC' | translate }}" routerLink="/company/companyUser"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-sitemap" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'department_TC' | translate }}" routerLink="/company/department"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'appSettings_TC' | translate }}" routerLink="/company/appSettings"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-key" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'password_reset_TC' | translate }}" routerLink="/reset-password"></button>
+    </p-accordionTab>
+    <p-accordionTab header="{{ 'master_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'unitMaster_TC' | translate }}" routerLink="/master/unitMaster"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-sitemap" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'productCategory_TC' | translate }}" routerLink="/master/productCategory"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'productSubCategory_TC' | translate }}" routerLink="/master/productSubcategory"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'productMaster_TC' | translate }}" routerLink="/master/productMaster"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'partyMaster_TC' | translate }}" routerLink="/master/partyMaster"></button>
+    </p-accordionTab>
+    <p-accordionTab header="{{ 'inward_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'project_TC' | translate }}" routerLink="/inward/project"></button><br>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'kitCreation_TC' | translate }}" routerLink="/inward/kitcreation"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'cmtrf_TC' | translate }}" routerLink="/inward/CMTRF"></button>
+    </p-accordionTab>
+    <p-accordionTab header="{{ 'inventory_TC' | translate }}">
+        <!-- <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'grnDetails_TC' | translate }}" routerLink="/inventory/grnDetails"></button> -->   
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'materialReceipt_TC' | translate }}" routerLink="/inventory/materialReceipt"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'GoodsAcceptance_TC' | translate }}" routerLink="/wareshouse/GoodsAcceptance"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'ProductTagging_TC' | translate }}" routerLink="/inventory/productTagging"></button>
+    </p-accordionTab>
+    <p-accordionTab header="{{ 'waresHouseCreation_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'waresHouseCreation_TC' | translate }}" routerLink="/wareshouse/wareHouseCreation"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'storageZone_TC' | translate }}" routerLink="/wareshouse/StorageZone"></button>    
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'zoneLevelCreation_TC' | translate }}" routerLink="/wareshouse/zoneLevelCreation"></button>    
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'ShelfCreation_TC' | translate }}" routerLink="/wareshouse/ShelfCreation"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'rackToRack_TC' | translate }}" routerLink="/wareshouse/RackToRackTransfer"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'zoneToZone_TC' | translate }}" routerLink="/wareshouse/ZoneToZoneTransfer"></button>
+        <!-- <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'palletCreation_TC' | translate }}" routerLink="/wareshouse/PalletCreation"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'refrigeration_TC' | translate }}" routerLink="/wareshouse/Refrigeration"></button> -->
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'storageTypeCreation_TC' | translate }}" routerLink="/wareshouse/StorageType"></button>        
+    </p-accordionTab>
+    <p-accordionTab header="{{ 'studymanage_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'studyMaterialDeliveryCreation_TC' | translate }}" routerLink="/studymanage/studyMaterialDelivery"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'studymaterialreturnCreation_TC' | translate }}" routerLink="/studymanage/studyMaterialReturn"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'studymaterialdistructCreation_TC' | translate }}" routerLink="/studymanage/studyMaterialDistruct"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'deliverySiteToPatientCreation_TC' | translate }}" routerLink="/studymanage/siteToPatientDelivery"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'nurseToPatient_TC' | translate }}" routerLink="/studymanage/nurseToPatient"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'siteToSiteCreation_TC' | translate }}" routerLink="/studymanage/siteToSite"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'exportedStudyMaterialCreation_TC' | translate }}" routerLink="/studymanage/studyMaterialExported"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'expireDateChangeCreation_TC' | translate }}" routerLink="/studymanage/expireDateChange"></button>
+    </p-accordionTab>
+
+    <!-- Finance Module Starts Here -->
+    <p-accordionTab header="{{ 'finance_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'project_loading_TC' | translate }}" routerLink="/finance/viewProducts"></button>
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'price_setting_TC' | translate }}" routerLink="/finance/priceSetting"></button>
+    </p-accordionTab>
+
+    <p-accordionTab header="{{ 'invoice_TC' | translate }}">
+        <button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'invoice_TC' | translate }}" routerLink="/invoice/invoice"></button>
+    </p-accordionTab>
+    <!-- Report Button Only -->
+    <!-- <p-accordionTab header="Reports">
+
+    </p-accordionTab>     -->
+</p-accordion>
+<button type="button" class="p-button-text" pButton pRipple icon="pi pi-cog" *ngIf="isUserLoggedIn()" (click)="closeMenu()" label="{{ 'reports_TC' | translate }}" routerLink="/report/list"></button>
+
+    <!-- <button type="button" class="p-button-text" pButton pRipple icon="pi pi-user-plus" *ngIf="!isUserLoggedIn()" label="Register" routerLink="/register"></button> -->
+    <!-- <button type="button" class="p-button-text" pButton pRipple icon="pi pi-key" label="Form examples" routerLink="/form-route"></button>     -->
+</div>

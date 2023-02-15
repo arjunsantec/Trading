@@ -1,0 +1,24 @@
+<div class="container">
+    <div *ngFor="let field of fields">
+        <div [ngSwitch]="field.type">
+            <app-header *ngSwitchCase="'header'" [field]="field"></app-header>
+            <app-acceptance-of-goods *ngSwitchCase="'acceptance'" [field]="field"></app-acceptance-of-goods>
+            <app-rack-to-rack-print *ngSwitchCase="'racktorack'" [field]="field"></app-rack-to-rack-print>
+            <app-receipt-of-goods *ngSwitchCase="'receipt'" [field]="field"></app-receipt-of-goods>
+            <app-zone-to-zone-print *ngSwitchCase="'zonetozone'" [field]="field"></app-zone-to-zone-print>
+            <app-study-materiasl-return *ngSwitchCase="'studymaterialreturn'" [field]="field"></app-study-materiasl-return>
+            <app-inventory-report *ngSwitchCase="'inventoryreport'" [field]="field"></app-inventory-report>
+            <app-distruct-study-material-print *ngSwitchCase="'studymaterialdistruct'" [field]="field"></app-distruct-study-material-print>
+            <app-delivery-study-material-print *ngSwitchCase="'studymaterialdelivery'" [field]="field"></app-delivery-study-material-print>
+            <delivery-site-to-patient-print *ngSwitchCase="'deliverysitetopatient'" [field]="field"></delivery-site-to-patient-print>
+            <nurse-to-patient *ngSwitchCase="'nursetopatient'" [field]="field"></nurse-to-patient>
+            <site-to-site *ngSwitchCase="'sitetosite'" [field]="field"></site-to-site>
+            <exported-study-material *ngSwitchCase="'studymaterialexported'" [field]="field"></exported-study-material>
+            <expire-date-change *ngSwitchCase="'expiredatechange'" [field]="field"></expire-date-change>
+            <invoice-print *ngSwitchCase="'invoice'" [field]="field"></invoice-print>
+            <app-footer-header *ngSwitchCase="'footerheader'" [field]="field"></app-footer-header>
+            <app-footer-body *ngSwitchCase="'footerbody'" [field]="field"></app-footer-body>
+            <app-footer *ngSwitchCase="'footer'" [field]="field"></app-footer>
+        </div>
+    </div>
+</div>

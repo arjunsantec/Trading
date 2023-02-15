@@ -1,0 +1,33 @@
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <button class="p-link layout-menu-button layout-topbar-button" (click)="display = true">
+            <i class="pi pi-bars"></i>
+        </button>
+        <a class="layout-topbar-logo ml-5" routerLink="" fxHide.lt-md *ngIf="isUserLoggedIn()" >
+            <img class="logo-img" src="assets/images/logo.png" alt="logo" height="40" width="40">
+            <!-- <span>{{ 'customerNAME_UC' | translate }}</span> -->
+            <span style="margin-left:2rem ;font-size: 20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;font-weight:bold ;">{{appTitle}}</span>
+        </a>
+    </div>
+    <a class="layout-topbar-logo" routerLink="" fxHide fxShow.lt-md *ngIf="isUserLoggedIn()">
+        <img class="logo-img" src="assets/images/logo.png" alt="logo"  height="40" width="40">
+        <!-- <span>{{ 'customerNAME_UC' | translate }}</span> -->
+        <span>{{appTitle}}</span>
+    </a>
+    <div class="p-toolbar-group-right" fxLayout="row" fxLayoutAlign="end center">
+        <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-text" *ngIf="isUserLoggedIn()"></button>
+        <button pButton pRipple type="button" icon="pi {{ themeIcon }}" class="p-button-rounded p-button-text" 
+         (click)="onThemeChange()" [pTooltip]="themeTitle"></button>
+        <button pButton pRipple type="button" icon="pi pi-globe" class="p-button-rounded p-button-text"
+        (click)="langmenu.toggle($event)"></button>
+        <button pButton pRipple type="button" class="p-button-rounded p-button-text"
+        (click)="fontmenu.toggle($event)">{{ 'sacalePlus_TC' | translate }}</button>
+        <button pButton pRipple type="button" icon="pi pi-sign-out" class="p-button-rounded p-button-text"
+        (click)="logout()" *ngIf="isUserLoggedIn()"></button>
+    </div>
+</p-toolbar>
+<p-menu #langmenu [popup]="true" [model]="langmenulist"></p-menu>
+<p-menu #fontmenu [popup]="true" [model]="fontmenulist"></p-menu>
+<p-sidebar [(visible)]="display">
+    <app-menu-list (emitter)="closeMenu($event)"></app-menu-list>
+</p-sidebar>

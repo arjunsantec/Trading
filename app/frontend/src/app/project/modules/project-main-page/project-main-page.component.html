@@ -1,0 +1,103 @@
+<div class="page company-main-container" fxLayout="column" fxLayoutGap="5px">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="{{'new_TC' | translate}}" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="showProjectModifier = true"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="{{ 'export_TC' | translate}}" icon="pi pi-upload" class="p-button-help"(click)="export(dt)"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [columns]="columns" [value]="projectList" [rows]="10" [paginator]="true" 
+    [globalFilterFields]="['projectName', 'projectCode', 'createdDate', 'fromCustomerName', 'toCustomerName', 'documentNo']"
+        [(selection)]="selectedProjects" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="{{translate.instant('entityTablePage_TC', {first: '{first}', last: '{last}', totalRecords: '{totalRecords}'})}}" [showCurrentPageReport]="true"
+        [scrollable]="true" scrollHeight="400px" scrollDirection="both">
+        <ng-template pTemplate="caption">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 class="p-m-0">{{ getTitlePage() }}</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="globalSearch($event, dt)" placeholder="{{ 'search_TC' | translate}}" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem" pFrozenColumn>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let col of columns" >
+                    <th [pSortableColumn]="col?.field">
+                        {{ col?.label | translate }} <p-sortIcon [field]="col?.field"></p-sortIcon>
+                        <p-columnFilter type="text" [field]="col?.field" display="menu"></p-columnFilter>
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-projectItem>
+            <tr>
+                <td pFrozenColumn>
+                    <p-tableCheckbox [value]="projectItem"></p-tableCheckbox>
+                </td>
+                <td>{{projectItem.projectName}}</td>
+                <td>{{projectItem.projectCode}}</td>
+                <!-- <td>{{projectItem.createdDate | date: 'short'}}</td> -->
+                <!-- <td>{{projectItem.loadingDate | date: 'short'}}</td> -->
+                <!-- <td>{{projectItem.shipmentDate | date: 'short'}}</td> -->
+                <!-- <td>{{projectItem.storageDays }}</td> -->
+                <td>{{projectItem.fromCustomerName}}</td>
+                <!-- <td>{{projectItem.fromAddress}}</td> -->
+                <!-- <td>{{projectItem.zipcode}}</td> -->
+                <!-- <td>{{projectItem.studyNumber}}</td> -->
+                <!-- <td>{{projectItem.protocolNumber}}</td> -->
+                <!-- <td>{{projectItem.orderNumber}}</td> -->
+                <!-- <td>{{projectItem.contactNo}}</td>  -->
+                <!-- <td>{{projectItem.contactPerson}}</td> -->
+                <!-- <td>{{projectItem.invoiceNumber}}</td> -->
+                <!-- <td>{{projectItem.awbNo}}</td> -->
+                <!-- <td>{{projectItem.proformaInvoice}}</td> -->
+                <!-- <td>{{projectItem.invoiceType }}</td> -->
+                <td>{{projectItem.toCustomerName}}</td>
+                <!-- <td>{{projectItem.toAddress}}</td> -->
+                <!-- <td>{{projectItem.toZipcode}}</td> -->
+                <!-- <td>
+                    <i class="pi" [ngClass]="{'true-icon pi-check-circle': projectItem.tempControlled, 'false-icon pi-times-circle': !projectItem.tempControlled}"></i>
+                </td> -->
+                <!-- <td>{{projectItem.minTemp}}</td> -->
+                <!-- <td>{{projectItem.maxTemp}}</td> -->
+                <!-- <td>
+                    <i class="pi" [ngClass]="{'true-icon pi-check-circle': projectItem.ambientControlled, 'false-icon pi-times-circle': !projectItem.ambientControlled}"></i>
+                </td> -->
+                <!-- <td>{{projectItem.ambientNote}}</td> -->
+                <td>{{projectItem.documentNo}}</td>
+                <!-- <td>{{projectItem.sopRelatedTo}}</td> -->
+                <!-- <td>{{projectItem.note}}</td> -->
+                <!-- <td>{{projectItem.name}}</td> -->
+                <!-- <td>{{projectItem.title}}</td> -->
+                <!-- <td>{{projectItem.locations}}</td> -->
+                <!-- <td>{{projectItem.date | date: 'short'}}</td> -->
+                <!-- <td>{{projectItem.signature}}</td> -->      
+                <td pFrozenColumn alignFrozen="right" [frozen]="true">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProject(projectItem)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProject($event, projectItem)"></button>
+                    <p-confirmPopup [key]="'deleteItem'"></p-confirmPopup>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                {{'entityTableFooter_TC' | translate}} {{projectList ? projectList.length : 0 }} {{'project_TC' | translate}}.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-sidebar [(visible)]="showProjectModifier" [fullScreen]="true" [baseZIndex]="10000" (onHide)="clearProject()">
+
+    <h1 style="font-weight:normal">{{ getTitleModifier() }}</h1>
+    <dynamic-form-builder [fields]="getFields()" (onSubmit)="saveProject($event)"></dynamic-form-builder>
+
+</p-sidebar>
+

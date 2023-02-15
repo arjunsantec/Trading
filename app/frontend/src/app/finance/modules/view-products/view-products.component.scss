@@ -1,0 +1,23 @@
+.company-main-container {
+    button {
+        margin: 2px;
+    }
+
+    tr {
+
+        th,
+        td:not(.p-frozen-column) {
+            width: 193px;
+        }
+
+        td {
+            .true-icon {
+                color: var(--green-500);
+            }
+
+            .false-icon {
+                color: var(--red-600);
+            }
+        }
+    }
+}

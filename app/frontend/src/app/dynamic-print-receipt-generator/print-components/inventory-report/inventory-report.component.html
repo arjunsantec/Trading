@@ -1,0 +1,49 @@
+<hr>
+<div class="imageText">
+    <div class="container">
+        <div class="logo">
+            <img src="../../../../assets//images/edit2.png" alt="logo">
+            <h5>Trust and save your time</h5>
+        </div>
+    </div>
+    <div class="geostorage">
+        <p>გეოსთრაგება / Geostorage</p>
+    </div>
+</div>
+<div>
+    <p-table #dt [columns]="columns" [value]="array">
+        <ng-template pTemplate="caption">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th [pSortableColumn]="col.field" class="border border-dark">
+                        {{ col.label | translate }}
+                    </th>
+                </ng-container>
+                <th pFrozenColumn alignFrozen="right" [frozen]="true"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-inventoryReportObjectItem let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex + 1}}</td>
+                <td>{{inventoryReportObjectItem.project}}</td>
+                <td>{{inventoryReportObjectItem.product}}</td>
+                <td>{{inventoryReportObjectItem.kit_no}}</td>
+                <td>{{inventoryReportObjectItem.batch_no}}</td>
+                <td>{{inventoryReportObjectItem.serial_number}}</td>
+                <td>{{inventoryReportObjectItem.available_qty}}</td>
+                <td>{{inventoryReportObjectItem.temp}}</td>
+                <td>{{inventoryReportObjectItem.expiry}}</td>
+                <td>{{inventoryReportObjectItem.status}}</td>
+                <td>{{inventoryReportObjectItem.note}}</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>
+<hr>
+<div class="pageBreak">
+</div>

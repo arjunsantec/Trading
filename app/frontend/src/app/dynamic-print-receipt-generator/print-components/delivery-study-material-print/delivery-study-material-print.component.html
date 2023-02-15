@@ -1,0 +1,182 @@
+<div class="header">
+    <p>ფორმა 047_სასწავლო მასალების მიწოდება</p>
+    <p>Form 047_Delivery of Study Materials</p>
+</div>
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>Მიმწოდებელი/Supplier</b></legend>
+            <p><b>სახელი/Name :</b> {{deliveryStudyMaterialObject.supplier}}</p>
+            <p><b>მისამართი/Address :</b> {{deliveryStudyMaterialObject.supplierAddress}}</p>
+            <p><b>ტელეფონი/Phone :</b> {{deliveryStudyMaterialObject.supplierPhone}}</p>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <legend><b>მიმღები/Recipient</b></legend>
+            <p><b>სახელი/Name :</b> {{deliveryStudyMaterialObject.recipient}}</p>
+            <p><b>მისამართი/Address :</b> {{deliveryStudyMaterialObject.recipientAddress}}</p>
+            <p><b>ტელეფონი/Phone :</b> {{deliveryStudyMaterialObject.recipientPhone}}</p>
+        </fieldset>
+    </div>
+</div>
+<div fxLayout="row">
+    <div fxFlex="50">
+        <div class="container">
+            <div class="logo">
+                <img src="../../../../assets//images/edit2.png" alt="logo">
+                <h5>Trust and save your time</h5>
+            </div>
+        </div>
+        <div class="geostorage">
+            <p>გეოსატორაჟი / Geostorage</p>
+        </div>
+    </div>
+</div>
+<div class="info">
+    <tr>
+        <td><b>ინვოისი #<br>Invoice #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+        <td>{{deliveryStudyMaterialObject.Invoice}}</td>
+    </tr><br>
+    <tr>
+        <td><b>ადგილობრივი ინვოისი #<br>Local invoice #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+        <td>{{deliveryStudyMaterialObject.localInvoice}}</td>
+    </tr><br>
+    <tr>
+        <td><b>Შეკვეთის ნომერი<br>Order Number</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+        <td>{{deliveryStudyMaterialObject.orderNumber}}</td>
+    </tr><br>
+    <tr>
+        <td><b>AWB</b></td>&nbsp;&emsp;&nbsp;&emsp;
+        <td>{{deliveryStudyMaterialObject.AWB}}</td>
+    </tr><br>
+</div>
+
+<div>
+    <p-table #dt [columns]="columns" [value]="array" [style]="{'width':'100%','overflow':'auto!important'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th [style]="{'font-size': '12px'}">
+                        <b>{{ col.label | translate }}</b>
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-deliveryStudyMaterialObjectItem>
+            <tr *ngFor="let item of deliveryStudyMaterialObjectItem.study_material_delivery_list
+            let indexOfelement=index;" [style]="{'font-size': '13px'}">
+                <td [style]="{'text-align':'center'}">{{indexOfelement + 1}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.kit_number}}</td>
+                <td>{{item.batch_no}}</td>
+                <td>{{item.serial_no}}</td>
+                <td>{{item.validity}}</td>
+                <td>{{item.temp}}</td>
+                <td>{{item.receive_date}}</td>
+                <td>{{item.comment}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<hr>
+<div class="fieldsets">
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>სპონსორი&nbsp;<br>Sponsor&nbsp;&nbsp; </b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;
+                    <td>{{deliveryStudyMaterialObject.sponsorName}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროტოკოლი #<br>Protocol #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;
+                    <td>{{deliveryStudyMaterialObject.Protocol}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>პროექტი #<br>Project #</b></td>&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{deliveryStudyMaterialObject.projectName}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+    <div class="fieldset1">
+        <fieldset>
+            <div class="info">
+                <tr>
+                    <td><b>წონა<br>Weight </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{deliveryStudyMaterialObject.Weight}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>ზომა <br>Size </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;
+                    <td>{{deliveryStudyMaterialObject.Size}}</td>
+                </tr><br>
+                <tr>
+                    <td><b>ყუთის რაოდენობა <br>Box quantity </b></td>
+                    &nbsp;&emsp;&nbsp;&emsp;&nbsp;&emsp;&nbsp;&nbsp;&nbsp;
+                    <td>{{deliveryStudyMaterialObject.boxQuantity}}</td>
+                </tr><br>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="pageBreak">
+</div>
+
+<div class="footerTop">
+    <p>ინვოისი / Invoice - {{this.deliveryStudyMaterialObject['Invoice']}}</p>
+    <p>დამატებითი ინფორმაცია / Additional Information</p>
+</div>
+<hr>
+
+<div style='margin-bottom: 1px' class="footerBody">
+    <p><b>კურიერი / Courier :</b> &emsp; {{this.deliveryStudyMaterialObject['supplierCourier']}} , <b>ხელმოწერა / Signature : ________________________</b></p>
+        <p><b>საწყობი / Warehouse :</b> &emsp; {{this.deliveryStudyMaterialObject['WareHouse'] ? this.deliveryStudyMaterialObject['WareHouse'] : ''}} , <b>ხელმოწერა / Signature : ________________________</b></p>
+        <p><b>გატანა თარიღი / Withdrawal date :</b> &emsp; {{this.deliveryStudyMaterialObject.withdrawalDate | date: 'yyyy-MM-dd'}} , 
+        <b>დრო/Time :</b> &emsp; {{this.deliveryStudyMaterialObject.withdrawalDate | date: 'hh:mm:ss a'}}</p>
+        <p><b>გადამოწმება / Verification :</b> &emsp; {{this.deliveryStudyMaterialObject['Verification']}} , <b>ხელმოწერა / Signature : ________________________</b></p>
+
+        <p ><b>კურიერი / Courier :</b> &emsp; {{this.deliveryStudyMaterialObject['recipientCourier']}}  , <b>ხელმოწერა / Signature : ________________________</b></p>
+        <p><b>მიმღები / Recipient :</b> &emsp; {{this.deliveryStudyMaterialObject['recipient']}} , <b>ხელმოწერა / Signature : ________________________</b></p>
+        <p><b>Მიღების თარიღი / Delivery date :</b> &emsp; {{this.deliveryStudyMaterialObject['deliveryDate'] | date: 'yyyy-MM-dd'}} , 
+        <b>დრო/Time :</b> &emsp; {{this.deliveryStudyMaterialObject['deliveryDate'] | date: 'h:mm:ss a'}}</p>
+        მიღებული პროდუქტი დაზიანებულია? (დიახ/არა) თუ „დიახ“ აღწერეთ/Is received product damaged?(Yes/No) if 'Yes' Describe:
+        <hr>
+        <p class="footer-text">
+            ამ გადაზიდვის შინაარსი გამოვლენილია მხოლოდ კლინიკური კვლევის გამოყენებისათვის და უნდა იქნას გამოყენებული მხოლოდ
+            კლინიკურ კვლევებში ჩარიცხული პაციენტების მკურნალობისთვის. არ არის კომერციული ღირებულება. არა იყიდება ან იყიდება.
+            გადაზიდვა უფასოდ უნდა გადაეცეს
+        </p>
+        <p style="word-spacing:1px;">
+            The content of this shipment is identified for clinical trial use only and must be used solely for the treatment
+            of patients enrolled in clinical trials. No commercial value. Not for sale or resale. Shipment must be hand
+            overed on free of charge basis
+        </p>
+        <p style="word-spacing:1px; font-size: medium;">
+        სსპ/SOP-06, ვერსია/Version-04, ფორმა/Form-047
+        </p>
+</div>
+<hr class="border">
+
+<div class="footerFooter">
+    <div class="english">
+        GeoStorage LTD<br>
+        G. Akhvlediani str. Building #3 Tbilisi,0109,Georgia.<br>
+        Contact person Tea Butskhrikidze<br>
+        phone : +995599 488008; +99532 2768970<br>
+        Fax : +99532 2768970<br>
+        Email: tea.butskhrikidze@storagegeo.com<br>
+    </div>
+    <div class="georgian">
+        შპს ჯეოსტორაჟი<br>
+        გ. ახვლედიანის ქ. შენობა #3 თბილისი, 0109, საქართველო.<br>
+        საკონტაქტო პირი თეა ბუცკრიკიძე<br>
+        ტელეფონი : +995599 488008; +99532 2768970<br>
+        ფაქსი : +99532 2768970<br>
+        ელ.ფოსტა: tea.butskhrikidze@storagegeo.com
+    </div>
+</div>

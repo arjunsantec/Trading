@@ -1,0 +1,21 @@
+<form fxLayout="column" fxLayoutGap="0.75rem" (ngSubmit)="onSubmit.emit(this.form.value)" [formGroup]="form" class="form-horizontal">
+    <div fxLayout="row wrap" fxLayoutGap="0.75rem">
+      <div class="field-container" [fxFlex]="(fullScreen && (field?.type !== 'table' && field?.type !== 'fieldset' && field?.type !== 'card' && field?.type !== 'tab')) ? 48 : 100" *ngFor="let field of fields">
+          <dynamic-field-builder [field]="field" [form]="form" *ngIf="field?.type !== 'card' || field?.type !== 'fieldset' || field?.type !== 'tab'"></dynamic-field-builder>
+          <card [fields]="field?.fields" [header]="field?.headerText" [footer]="field?.footerText" [form]="form" *ngIf="field?.type === 'card'"></card>
+          <fieldset [fields]="field?.fields" [header]="field?.headerText" [fillScreen]="field?.fillScreen" [form]="form" *ngIf="field?.type === 'fieldset'"></fieldset>
+          <tab [fields]="field?.fields" [headerTextArray]="field?.headerTextArray" [form]="form" *ngIf="field?.type === 'tab'"></tab>
+      </div>
+    </div>
+    <div class="form-row"></div>
+    <div class="form-group row">
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <!-- <button pButton type="submit" [disabled]="!form.valid" label="{{'save_TC' | translate}}" class="btn btn-primary"></button> -->
+        <button *ngIf="buttonLabel == 'save'" pButton type="submit" [disabled]="!form.valid || disabled" label="{{'save_TC' | translate}}" class="btn btn-primary"></button>
+        <button *ngIf="buttonLabel == 'approve'" pButton type="submit" [disabled]="!form.valid || disabled" label="Approve" class="btn btn-primary"></button>
+        <button *ngIf="buttonLabel == 'approved'" pButton type="submit" [disabled]="!form.valid || disabled" label="Approved" class="btn btn-primary"></button>
+        <button *ngIf="buttonLabel == 'Show Data'" pButton type="submit" [disabled]="!form.valid || disabled" label="{{buttonLabel}}" class="btn btn-primary"></button>
+      </div>
+    </div>
+  </form>
