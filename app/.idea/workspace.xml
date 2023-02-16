@@ -1,7 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbd4cf32-1420-4012-b1d6-6d8e48ac6841" name="Changes" comment="" />
+    <list default="true" id="bbd4cf32-1420-4012-b1d6-6d8e48ac6841" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/dashboard_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/dashboard/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/finance/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/inventory/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/invoice/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/masters/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/purchase/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/purchase/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/purchase/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/purchase/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/purchase/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/purchase/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/reportengine/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/sales/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/studymanage/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/wareshouse/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/urls.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,13 +122,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/SanadiTech/Trading/Trading/app"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/SanadiTech/Trading/Trading/app&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

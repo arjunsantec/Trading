@@ -47,22 +47,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     'simple_history',
-    'apps.audit_fields',
-    'apps.security',
-    'apps.tenant',
-    'apps.company',
-    'apps.masters',
-    'apps.sales',
-    'apps.inventory',
-    'apps.wareshouse',
-    'apps.studymanage',
-    'apps.finance',
-    'apps.reportengine',
-    'apps.invoice',
+    'apps.trading',
     'sequences',
-
-
-
 ]
 
 MIDDLEWARE = [
@@ -117,7 +103,7 @@ DATABASES = {
         },
     },
     'WMS': {
-        'NAME': 'ST000038_WMS',
+        'NAME': 'trading',
         'HOST': 'localhost',
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',

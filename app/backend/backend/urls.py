@@ -47,15 +47,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('security/', include('apps.security.urls')),
     path('company/', include('apps.company.urls')),
-    path('master/', include('apps.masters.urls')),
-    path('sales/', include('apps.sales.urls')),
-    path('inventory/', include('apps.inventory.urls')),
-    path('warehouse/', include('apps.wareshouse.urls')),
-    path('studymanage/', include('apps.studymanage.urls')),
-    path('dashboard/', include('apps.dashboard.urls')),
-    path('ReportEngineMain/', include('apps.reportengine.urls')),
-    path('Finance/', include('apps.finance.urls')),
-    path('Invoice/', include('apps.invoice.urls')),
+    path('trading/', include('apps.invoice.urls')),
 
 ]
 
