@@ -47,7 +47,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('security/', include('apps.security.urls')),
     path('company/', include('apps.company.urls')),
-    path('trading/', include('apps.invoice.urls')),
+    path('trading/', include('apps.trading.urls')),
 
 ]
 

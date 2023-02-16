@@ -5,8 +5,9 @@ from rest_framework import routers
 from . import views,api
 
 router = routers.DefaultRouter()
-router.register("MED.JobbingProforma", api.MEDJobbingProformaViewSet)
+router.register("trading", api.TradeViewSet)
 
 urlpatterns = (
     path("api/v1/", include(router.urls)),
+    path('api/v1/Trade', views.trade, name="trade"),
 )

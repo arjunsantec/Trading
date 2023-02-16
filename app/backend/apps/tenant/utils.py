@@ -10,6 +10,5 @@ def tenant_db_from_the_request(request):
 
 def get_tenants_map():
     return {
-        "rdc.craftyouridea.local": "RDC",
-        "wms.craftyouridea.local": "WMS",
+        "trade.craftyouridea.local": "TRADE",
     }

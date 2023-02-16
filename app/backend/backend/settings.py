@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django_filters',
     'simple_history',
     'apps.trading',
+    'apps.company',
+    'apps.security',
     'sequences',
 ]
 
@@ -102,7 +104,7 @@ DATABASES = {
             # 'autocommit': True,
         },
     },
-    'WMS': {
+    'TRADE': {
         'NAME': 'trading',
         'HOST': 'localhost',
         'ENGINE': 'django.db.backends.postgresql',
