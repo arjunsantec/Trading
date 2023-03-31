@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9985be09-837c-4b22-b5fb-f6106070a174" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app/backend/apps/reportengine/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/apps/reportengine/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/backend/apps/tenant/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/apps/tenant/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/backend/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/backend/apps/trading/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/apps/trading/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/backend/apps/trading/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/apps/trading/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/backend/apps/trading/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/apps/trading/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/backend/apps/trading/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/backend/apps/trading/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +36,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/SanadiTech/viora-2.0-server/VioraServer",
+    "last_opened_file_path": "C:/SanadiTech/Trading/Trading",
     "settings.editor.selected.configurable": "terminal"
   }
 }]]></component>

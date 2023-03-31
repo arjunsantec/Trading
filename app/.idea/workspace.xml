@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbd4cf32-1420-4012-b1d6-6d8e48ac6841" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/apps/trading/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/apps/security/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/security/serializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/apps/tenant/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/tenant/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/apps/trading/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/apps/trading/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/apps/trading/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/trading/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/trading/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/apps/trading/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/apps/trading/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/trading/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +36,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/SanadiTech/AMIGOWAREHOUSE_BASE"
+    "last_opened_file_path": "C:/SanadiTech/Trading/Trading/app"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
