@@ -11,5 +11,11 @@ class TradeViewSet(viewsets.ModelViewSet):
     queryset = models.Trade.objects.all()
     serializer_class = serializers.TradeSerializer
     # permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, ]
     search_fields = ['company']
+
+
+class TradeListViewSet(viewsets.ModelViewSet):  
+    queryset = models.TradeData.objects.all()  
+    serializer_class = serializers.TradeDataSerializer  
+    permission_classes = [permissions.IsAuthenticated]    
