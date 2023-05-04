@@ -21,23 +21,17 @@ def trade(request):
 @permission_classes((IsAuthenticated,))
 def trade_algorithm(request):
    stock_service = StockService()
-   print("bandide")
-   date_enter =   request.data.get('date')
-   ticker_value = request.data.get('ticker')
-   interval_val = request.data.get('interval')
-   print("bartide")
-   print(date_enter, ticker_value, interval_val)
-   print (type(date_enter))
-   fn = stock_service.inputs_final(date_enter, ticker_value, interval_val)
-   print("data sent to service ")
+   
+   date_entered = request.data.get('date')
+   ticker_valued = request.data.get('ticker')
+   interval_vald = request.data.get('interval')
+   
+   fn = stock_service.inputs_final(date_entered, ticker_valued, interval_vald)
+   
    if fn:
-      
-      with open(fn, 'rb') as f:
-         content_type = 'application/octet-stream'
-         response = HttpResponse(f.read(), content_type=content_type)
-         response['Content-Disposition'] = f'attachment; filename="{os.path.basename(fn)}"'
-         return response
+      success_msg = "Successfully sent data to service."
+      return HttpResponse(success_msg, status=200)
+
    else:
-      
       error_message = "Unable to generate the Excel file."
       return HttpResponse(error_message, status=400)

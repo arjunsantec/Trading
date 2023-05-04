@@ -1,17 +1,14 @@
 #import timeit
 import time
 # Raw Package
+import numpy as np
+import pandas as pd
 from datetime import datetime, timedelta,date
 #Data Source
-import yfinance
+import yfinance as yf
 import os
 from datetime import datetime
 import warnings
-from .models import Trade
-#from app.backend.apps.trading.models import Trade
-
-#from trading.models import Trade
-
 warnings.filterwarnings('ignore')
 # start_time = time.strftime('%X %x %Z')
 # print("Start Time", start_time)
@@ -30,9 +27,9 @@ print("START Time ", start_time)
 
 class StockService:
     @classmethod
-    def trade(cls):
-        data_list = Trade.objects.count()
-        return list(data_list)
+    # def trade(cls):
+    #     data_list = StockService.Trade.objects.count()
+    #     return list(data_list)
     
     def construct_df_fold_price(df, fold_num):
     # Input data df has 91 rows & fold_num in the range of 1 to 
@@ -137,24 +134,24 @@ class StockService:
             step_4_op_lst = np.array(step_4_op_lst)
             return step_4_op_lst    
         
-   ###Step 6(1)
-        def step_6_calculation(step_4_calc_op):
-            step_6_calc_matrix = []
-            for i in range(step_4_calc_op.shape[0]):
-                emp_mat = []
-                zero_mat = np.zeros([3,3])
-                for j in range(0, step_4_calc_op.shape[0]):
-                    calc = step_4_calc_op[i] * step_4_calc_op[j]    
-                    emp_mat.append(calc)
-                    emp_mat = np.array(emp_mat)
-                    emp_mat[i] = zero_mat
-                    step_6_calc_matrix.append(emp_mat)
-        step_6_calc_matrix = np.array(StockService.step_6_calc_matrix)
+
+    ###Step 6(1)
+    def step_6_calculation(step_4_calc_op):
+        step_6_calc_matrix = []
+        for i in range(step_4_calc_op.shape[0]):
+            emp_mat = []
+            zero_mat = np.zeros([3,3])
+            for j in range(0, step_4_calc_op.shape[0]):
+                calc = step_4_calc_op[i] * step_4_calc_op[j]    
+                emp_mat.append(calc)
+            emp_mat = np.array(emp_mat)
+            emp_mat[i] = zero_mat
+            step_6_calc_matrix.append(emp_mat)
+        step_6_calc_matrix = np.array(step_6_calc_matrix)
         step_6_calculatns_swap = step_6_calc_matrix.copy()
         step_6_calculatns_swap[6] = step_6_calc_matrix[8]
         step_6_calculatns_swap[8] = step_6_calc_matrix[6]
-        return step_6_calculatns_swap     
-    
+        return step_6_calculatns_swap
 
 
 
@@ -168,10 +165,10 @@ class StockService:
                 sum_list_1.append(np.sum(step_6_calc_op[i][j]))
                 if sum_list_1[j] == 0:
                     sum_list_1[j] = calculation_5_op_flat[j]
-                sum_list_1 = np.array(sum_list_1).reshape(3,3)
-                sum_list_outer.append(sum_list_1)
-            sum_list_outer_array = np.array(sum_list_outer)
-            return sum_list_outer_array
+            sum_list_1 = np.array(sum_list_1).reshape(3,3)
+            sum_list_outer.append(sum_list_1)
+        sum_list_outer_array = np.array(sum_list_outer)
+        return sum_list_outer_array
         
 
      # Function to swap the 7th & 9th matrices
@@ -228,6 +225,14 @@ class StockService:
         step_8_2_a_op[7] = step_8_1_a_op[8]
         step_8_2_a_op[8] = step_8_1_a_op[0]
         return step_8_2_a_op
+    
+    def calculation_8_2(step_8_2_a_op_v):
+        kernel = np.ones((3,3)) / 9.
+        calc_8_2_op = convolve2d(step_8_2_a_op_v, kernel, mode='valid')
+        calc_8_2_op_final = calc_8_2_op[:3,:3]
+        return calc_8_2_op_final
+
+
     
         ###Step 8(3)
     def step_8_3_a(step_8_1_a_op):
@@ -1126,6 +1131,14 @@ class StockService:
         return nine_folds_price
     
 
+    def step_4_add_x(nine_folds_price, x_sign_changed):
+        nine_folds_price_transposed = nine_folds_price.T
+        nine_avgs_price = np.array([np.mean(li) for li in nine_folds_price_transposed])
+        nine_avgs_price_avg = (nine_avgs_price + x_sign_changed)
+        return nine_avgs_price_avg
+
+
+
     def getting_9_fold_values_price_diff(df1):
         list_of_9_fold_price=[]
         list_of_9_fold_diff=[]
@@ -1142,9 +1155,9 @@ class StockService:
     
 
     def getting_final_dict_8vals(list_of_9_fold_price,list_of_9_fold_diff,df_fold_diff_12,df_temp):
-        nine_folds_diff = StockService.calc_nine_folds_diff(list_of_9_fold_diff)
+        nine_folds_diff =StockService.calc_nine_folds_diff(list_of_9_fold_diff)
         nine_avgs_diff=StockService.calc_nine_avgs_diff(nine_folds_diff)
-        
+
         nine_folds_diff_doubled = nine_folds_diff * 2
         nine_avgs_diff_doubled = nine_avgs_diff * 2
         s_3_open = StockService.calc_inter_1(nine_avgs_diff,nine_folds_diff,df_fold_diff_12)
@@ -1152,7 +1165,7 @@ class StockService:
         x_sign_changed = -1 * s_13
         nine_folds_price=StockService.calc_nine_folds_price(list_of_9_fold_price)
         nine_avgs_price_avg = StockService.step_4_add_x(nine_folds_price, x_sign_changed)
-        # Taking average of nine_avgs excluding the first (n_30) & the last avgs (n_38)
+            # Taking average of nine_avgs excluding the first (n_30) & the last avgs (n_38)
         p_34 = np.mean(nine_avgs_price_avg[list(range(1,len(nine_avgs_price_avg)-1))])
         # Multiply the nine_folds_z by 2
         nine_folds_price_doubled = nine_folds_price * 2
@@ -1272,26 +1285,26 @@ class StockService:
 
         # Support at L55 
         Support_L_55 = (Support_L_54 - Error4)
-    #     dict_data = {
-    #     "H1" : [H1_G_54, H1_G_55],
-    #     "H2" : [H2_H_54, H2_H_55],
-    #     "H3" : [H3_I_54, H3_I_55],
-    #     "L1" : [L1_J_54, L1_J_55],
-    #     "L2" : [L2_K_54, L2_K_55],
-    #     "Support" : [Support_L_54, Support_L_55],
-    #     "Open" : [Open_M_54.round(2), " "],
-    #     "Error 4" : [Error4.round(2), " "]}
-    #     dict_data = {
-    #     "H1" : [H1_G_54, H1_G_55],
-    #     "H2" : [H2_H_54, H2_H_55],
-    #     "H3" : [H3_I_54, H3_I_55],
-    #     "L1" : [L1_J_54, L1_J_55],
-    #     "L2" : [L2_K_54, L2_K_55],
-    #     "Support" : [Support_L_54, Support_L_55],
-    #     "Open" : [Open_M_54, " "],
-    #     "Error 4" : [Error4, " "]  
-    #     }
-    #     return dict_data
+        #     dict_data = {
+        #     "H1" : [H1_G_54, H1_G_55],
+        #     "H2" : [H2_H_54, H2_H_55],
+        #     "H3" : [H3_I_54, H3_I_55],
+        #     "L1" : [L1_J_54, L1_J_55],
+        #     "L2" : [L2_K_54, L2_K_55],
+        #     "Support" : [Support_L_54, Support_L_55],
+        #     "Open" : [Open_M_54.round(2), " "],
+        #     "Error 4" : [Error4.round(2), " "]}
+        #     dict_data = {
+        #     "H1" : [H1_G_54, H1_G_55],
+        #     "H2" : [H2_H_54, H2_H_55],
+        #     "H3" : [H3_I_54, H3_I_55],
+        #     "L1" : [L1_J_54, L1_J_55],
+        #     "L2" : [L2_K_54, L2_K_55],
+        #     "Support" : [Support_L_54, Support_L_55],
+        #     "Open" : [Open_M_54, " "],
+        #     "Error 4" : [Error4, " "]  
+        #     }
+        #     return dict_data
         dict_data = {
         "H1" : H1_G_54,
         "H2" : H2_H_54,
@@ -1357,6 +1370,10 @@ class StockService:
         return li_list_of_dict,li_list_of_dict2
     
 
+    # df_temp=df_2.iloc[8:99]
+
+    # df_temp.reset_index(inplace=True,drop=True)
+
     def create_data_frame(list_of_dict):
         df_table1 = pd.DataFrame.from_dict(list_of_dict)
         return df_table1
@@ -1374,48 +1391,207 @@ class StockService:
         return pressure,ERROR_FINAL
         
 
+
+
+    def high_of_high_and_low_of_low(df_use,interval):
+        df_use.reset_index(inplace=True)
+        
+        if(interval in ['60m','1h']):
+            max_1=np.max(df_use.iloc[92:99]['High'])
+            min_1=np.min(df_use.iloc[92:99]['Low'])
+        else:
+            max_1=np.max(df_use.iloc[90:99]['High'])
+            min_1=np.min(df_use.iloc[90:99]['Low'])
+        return max_1,min_1
+
+
+
+    def second_max_min(Begindate,ticker_value,interval_val_1):
+        if(interval_val_1 in ['1h','60m']):
+            interval_val='5m'
+        elif(interval_val_1 in ['2h','3h']):
+            interval_val='15m'
+        elif(interval_val_1 =='1d'):
+            interval_val='1h'
+        elif(interval_val_1 =='1wk'):
+            interval_val='1d'
+        elif(interval_val_1 =='1mo'):
+            interval_val='1wk'
+    
+    
+    
+        
+    
+        list_of_interval={'1m':5,'2m':5,'5m':5,'15m' :15,'30m':18,'60m':30,'90m':40,'1h':70,'2h':70,'3h':70,'1d':250,'5d':1100,'1wk':1200,'1mo':6000,'3mo':10000}
+
+        if(interval_val in ['2h','3h']):
+            data = yf.download(tickers=ticker_value, start=Begindate-timedelta(days=list_of_interval[interval_val]),end=Begindate+timedelta(days=1), interval='1h').reset_index()
+            if(interval_val=='3h'):
+                data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
+                data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
+                data=data[(data['Datetime'].dt.strftime("%H:%M:%S") =='09:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='12:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='15:15:00')]
+                df_data_filter=data[data['Datetime']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Datetime','Open']]
+                df_final_filter_high_low=df_data_filter1[['Datetime','High','Low']]
+                df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
+            else:
+      
+                data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
+                data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
+                data=data[(data['Datetime'].dt.strftime("%H:%M:%S") =='09:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='11:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='13:15:00')| (data['Datetime'].dt.strftime("%H:%M:%S") =='15:15:00')]
+                df_data_filter=data[data['Datetime']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Datetime','Open']]
+                df_final_filter_high_low=df_data_filter1[['Datetime','High','Low']]
+                df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
+
+        else:
+            data = yf.download(tickers=ticker_value, start=Begindate-timedelta(days=list_of_interval[interval_val]),end=Begindate+timedelta(days=1), interval=interval_val).reset_index()
+            if(interval_val in ['1d','5d','1wk','1mo','3mo']):
+                data['Date']=data['Date'].dt.strftime("%Y-%m-%d")
+                data['Date']=pd.to_datetime(data['Date'],format='%Y-%m-%d')
+                Begindate=Begindate.date()
+                Begindate=pd.to_datetime(Begindate,format='%Y-%m-%d')
+                df_data_filter=data[data['Date']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Date','Open']]
+                df_final_filter_high_low=df_data_filter1[['Date','High','Low']]
+                df_final_filter.rename(columns={'Date':'date','Open':'data'},inplace=True)
+            else:
+        
+                data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
+                data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
+
+                df_data_filter=data[data['Datetime']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Datetime','Open']]
+                df_final_filter_high_low=df_data_filter1[['Datetime','High','Low']]
+                df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
+        print("high_low_1",df_final_filter_high_low.iloc[-1])
+
+        return df_final_filter_high_low.iloc[-1]['High'],df_final_filter_high_low.iloc[-1]['Low']
+
+
+    def calucation_final_10values(e,pressure,H1,L1):
+        #calculate Centric high (CH) 
+        A1 = L1 + 2*(e*0.618) + 2*(e*0.022) - e*0.786
+        print("A1",A1)
+        #To calculate Centric low (CL) =
+        B1 = H1-2*(e*0.618)- 2*(e*0.022) + e*0.786
+        print("B1",B1)
+        Los_up=B1+e*0.618+e*0.236
+        Los_dow=A1 - e*0.618 - e*0.236
+        hh1=A1-e*0.618 + e*1
+        HH2=B1+e*0.618+e*0.786
+        HL1=B1+e*0.618 - e*1
+        HL2=A1-e*0.618-e*0.786
+        Level1_up = A1
+        Level2_up = Level1_up+e+0.022*e*2.618
+        Level1_dow = B1
+        Level2_dow = Level1_dow -e - 0.022*e*2.618
+        SL1_uptrend=HH2-e*0.786+e
+        SL1_down_trend=HL2+e*0.786-e
+        SS_1=Los_up-e*0.236+e*0.382
+        SS_2=Los_dow+e*0.236-e*0.382
+        print("Line of Strength (Los)(uptrend)   :",Los_up )
+        print("Line of strength (Los) (down trend)   :",Los_dow )
+        print("Hypothetical high (hh1)   :",hh1 )
+        print("Hypothetical High (HH2)   :",HH2 )
+        print("Hypothetical low (HL1)   :",HL1 )
+        print("Hypothetical low (HL2)   :",HL2 )
+        print("Upside level 1   :",Level1_up)
+        print("Upside level 2   :",Level2_up)
+        print("Down side level 1   :",Level1_dow)
+        print("Down side level 2   :",Level2_dow)
+        print("Stop loss uptrend",SL1_uptrend)
+        print("Stop loss downtrend",SL1_down_trend)
+        print("SS 1",SS_1)
+        print("SS 2",SS_2)
+
+
+
+    def calucation_final_10values_wrapper(error,pressure,high_value1,Low_value1,high_value2,Low_value2):
+        print("Part-A calulcation")
+        StockService.calucation_final_10values(error,pressure,high_value1,Low_value1)
+        print("-----------------------------------------------------------------------")
+        print("Part-B calulcation")
+        StockService.calucation_final_10values(error,pressure,high_value2,Low_value2)
+
+
+
+
+
     ### Execution  ###
     
-    def inputs_final(self,date_enter,ticker_value,interval_val):
+    ### Execution  ###
+    def inputs_final(self,date_entered, ticker_valued, interval_vald):
+        print("Excecutionable Values"+ date_entered+ ticker_valued+interval_vald)
         start_time1 = time.strftime('%X %x %Z')
-        #date_enter=input("Enter the date")
-        print("Input_final Entering:")
-        date = date_enter
-        #tk = ticker_value
-        #it = interval_val
-        print(date)
-        print(date_enter,ticker_value,interval_val)
-        Begindate = datetime.strptime(date_enter, "%Y-%m-%d %H:%M")
-        list_of_interval={'1m':5,'2m':5,'5m':5,'15m':15,'30m':18,'60m':30,'90m':40,'1h':30,'1d':250,'5d':1100,'1wk':1200,'1mo':6000,'3mo':10000}
-        #ticker_value=input("enter the ticker name of the stock")
-        #print("Please select the intervel from the list  1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo")
-        #interval_val=input("enter the interval value")
-        print(f"You entered {date_enter} for ticker name")
-        print(f"You entered {ticker_value} for ticker name")
-        print(f"You entered {interval_val} for the interval value")
-        data= yfinance.download(tickers="MSFT")
-        data1= yfinance.download(tickers="MSFT")
+        # date_enter=input("Enter the date")
+        date_enter=date_entered
 
-        #data = yf.download(tickers=ticker_value, start=Begindate-timedelta(days=list_of_interval[interval_val]),end=Begindate+timedelta(days=1), interval=interval_val).reset_index()
-        print("Data Frame",data1 )
-        if(interval_val in ['1d','5d','1wk','1mo','3mo']):
-            data['Date']=data['Date'].dt.strftime("%Y-%m-%d")
-            data['Date']=pd.to_datetime(data['Date'],format='%Y-%m-%d')
-            Begindate=Begindate.date()
-            Begindate=pd.to_datetime(Begindate,format='%Y-%m-%d')
-            df_data_filter=data[data['Date']<=Begindate]
-            df_data_filter1=df_data_filter.tail(100)
-            df_final_filter=df_data_filter1[['Date','Open']]
-            df_final_filter.rename(columns={'Date':'date','Open':'data'},inplace=True)
+
+        print("You entered  date value: " + date_enter)
+        Begindate = datetime.strptime(date_enter, "%Y-%m-%d %H:%M")
+
+        list_of_interval={'1m':5,'2m':5,'5m':5,'15m' :15,'30m':18,'60m':30,'90m':40,'1h':70,'2h':70,'3h':70,'1d':250,'5d':1100,'1wk':1200,'1mo':6000,'3mo':10000}
+        # ticker_value=input("enter the ticker name of the stock")
+        ticker_value=ticker_valued
+        print ("yoy have entered ticker :" + ticker_value)
+        print("Please select the intervel from the list  1m,2m,5m,15m,30m,60m,90m,1h,2h,3h,1d,5d,1wk,1mo,3mo")
+        # interval_val=input("enter the interval value")
+        interval_val=interval_vald
+        print("you eneterd the interval :" + interval_val)
+        high_value1,Low_value1=StockService.second_max_min(Begindate,ticker_value,interval_val)
+        if interval_val in ['2h', '3h']:
+            data = yf.download(tickers=ticker_value, start=Begindate-timedelta(days=list_of_interval[interval_val]),end=Begindate+timedelta(days=1), interval='1h').reset_index()
+            if(interval_val=='3h'):
+                data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
+                data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
+                data=data[(data['Datetime'].dt.strftime("%H:%M:%S") =='09:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='12:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='15:15:00')]
+                df_data_filter=data[data['Datetime']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Datetime','Open']]
+                df_final_filter_high_low=df_data_filter1[['Datetime','High','Low']]
+                df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
+            else:
+        
+                data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
+                data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
+                data=data[(data['Datetime'].dt.strftime("%H:%M:%S") =='09:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='11:15:00') | (data['Datetime'].dt.strftime("%H:%M:%S") =='13:15:00')| (data['Datetime'].dt.strftime("%H:%M:%S") =='15:15:00')]
+                df_data_filter=data[data['Datetime']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Datetime','Open']]
+                df_final_filter_high_low=df_data_filter1[['Datetime','High','Low']]
+                df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
+
         else:
-            data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
-            data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
-            df_data_filter=data[data['Datetime']<=Begindate]
-            df_data_filter1=df_data_filter.tail(100)
-            df_final_filter=df_data_filter1[['Datetime','Open']]
-            df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
+            data = yf.download(tickers=ticker_value, start=Begindate-timedelta(days=list_of_interval[interval_val]),end=Begindate+timedelta(days=1), interval=interval_val).reset_index()
+            if(interval_val in ['1d','5d','1wk','1mo','3mo']):
+                data['Date']=data['Date'].dt.strftime("%Y-%m-%d")
+                data['Date']=pd.to_datetime(data['Date'],format='%Y-%m-%d')
+                Begindate=Begindate.date()
+                Begindate=pd.to_datetime(Begindate,format='%Y-%m-%d')
+                df_data_filter=data[data['Date']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Date','Open']]
+                df_final_filter_high_low=df_data_filter1[['Date','High','Low']]
+                df_final_filter.rename(columns={'Date':'date','Open':'data'},inplace=True)
+            else:
+        
+                data['Datetime']=data['Datetime'].dt.strftime("%Y-%m-%d %H:%M")
+                data['Datetime']=pd.to_datetime(data['Datetime'],format='%Y-%m-%d %H:%M')
+
+                df_data_filter=data[data['Datetime']<=Begindate]
+                df_data_filter1=df_data_filter.tail(100)
+                df_final_filter=df_data_filter1[['Datetime','Open']]
+                df_final_filter_high_low=df_data_filter1[['Datetime','High','Low']]
+                df_final_filter.rename(columns={'Datetime':'date','Open':'data'},inplace=True)
 
         df1_tt = df_final_filter.reset_index(drop=True).copy()
+        high_value2,Low_value2=StockService.high_of_high_and_low_of_low(df_final_filter_high_low.copy(),interval_val)
+        print("high_low_2",high_value2,Low_value2)
         print(df1_tt.shape)
         df_copy=df1_tt.copy()
         df_copy1=df1_tt.copy()
@@ -1429,16 +1605,17 @@ class StockService:
         DF_final_v1_1a=StockService.change_of_first_3_values(DF_final_v1.copy(),DF_final_v1_1.copy())
         DF_final_v2_1a=StockService.change_of_first_all_values(DF_final_v2.copy(),DF_final_v2_1.copy())
         pressure_value,error_value=StockService.calculate_pressure_error(DF_final_v1_1,DF_final_v1_1a,DF_final_v2_1,DF_final_v2_1a)
-        print() 
+        print()
         print("---------------------------------------------------------------------------------------------------------------")
         print("the pressure and error on",DF_final_v2['date_time'].iloc[-1],"and for open price ",DF_final_v1['Open'].iloc[-1])
         print(pressure_value,error_value)
         print("---------------------------------------------------------------------------------------------------------------")
+        StockService.calucation_final_10values_wrapper(error_value,pressure_value,high_value1,Low_value1,high_value2,Low_value2)
         end_time1 = time.strftime('%X %x %Z')
         print(start_time1,end_time1)
         df_for_return = df1_tt.append({'date':{"pressure_value":pressure_value}, 'data':{"error_value":error_value}}, ignore_index=True)
         currentDT = datetime.now()
         STRING_DATE=currentDT.strftime("%Y_%m_%d_%H_%M_%S")
-        df_for_return.to_excel(excel_writer=ticker_value[1:]+STRING_DATE+".xlsx",index=False)
+        #df_for_return.to_excel(excel_writer=ticker_value[1:]+STRING_DATE+".xlsx",index=False)
         # pressure_value ,error_value ,df_for_return
     
